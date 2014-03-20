@@ -8,11 +8,91 @@
 
 #import "AppDelegate.h"
 
+#import "MMDrawerController.h"
+#import "MMDrawerVisualState.h"
+#import "CSDrawerVisualStateManager.h"
+
+#import "CSHomeViewController.h"
+#import "CSLeftViewController.h"
+#import "CSNavigationController.h"
+
+#import <QuartzCore/QuartzCore.h>
+
+
+#define kSlideMenuWidth                200.0f
+
+
+@interface AppDelegate ()
+@property (nonatomic,strong) MMDrawerController * drawerController;
+@end
+
 @implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    UIViewController * leftSideViewController = [[CSLeftViewController alloc] init];
+    
+    UIViewController * centerViewController = [[CSHomeViewController alloc] init];
+    
+    //UIViewController * rightSideDrawerViewController = [[RightSideDrawerViewController alloc] init];
+    
+    UINavigationController * navigationController = [[CSNavigationController alloc] initWithRootViewController:centerViewController];
+    
+    if ([navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)])
+        [navigationController.navigationBar setBarTintColor:[UIColor greenColor]];
+    
+    [navigationController setRestorationIdentifier:@"CSNavigationControllerRestorationKey"];
+    
+    if(OSVersionIsAtLeastiOS7()){
+
+        //UINavigationController * leftSideNavController = [[CSNavigationController alloc] initWithRootViewController:leftSideViewController];
+		//[leftSideNavController setRestorationIdentifier:@"CSLeftControllerRestorationKey"];
+        
+        self.drawerController = [[MMDrawerController alloc]
+                                 initWithCenterViewController:navigationController
+                                 leftDrawerViewController:leftSideViewController
+                                 rightDrawerViewController:nil];
+        [self.drawerController setShowsShadow:NO];
+    }
+    else{
+        self.drawerController = [[MMDrawerController alloc]
+                                 initWithCenterViewController:centerViewController
+                                 leftDrawerViewController:leftSideViewController
+                                 rightDrawerViewController:nil];
+    }
+    [self.drawerController setRestorationIdentifier:@"MMDrawer"];
+    
+    [self.drawerController setMaximumLeftDrawerWidth:kSlideMenuWidth];
+    [self.drawerController setShowsShadow:YES];
+    [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    
+    [self.drawerController
+     setDrawerVisualStateBlock:^(MMDrawerController *drawerController, MMDrawerSide drawerSide, CGFloat percentVisible) {
+         MMDrawerControllerDrawerVisualStateBlock block;
+         block = [[CSDrawerVisualStateManager sharedManager]
+                  drawerVisualStateBlockForDrawerSide:drawerSide];
+         if(block){
+             block(drawerController, drawerSide, percentVisible);
+         }
+     }];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    if(OSVersionIsAtLeastiOS7()){
+        UIColor * tintColor = [UIColor colorWithRed:29.0/255.0
+                                              green:173.0/255.0
+                                               blue:234.0/255.0
+                                              alpha:1.0];
+        [self.window setTintColor:tintColor];
+    }
+    [self.window setRootViewController:self.drawerController];
+    
+    return YES;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];//黑体白字
     return YES;
 }
 							

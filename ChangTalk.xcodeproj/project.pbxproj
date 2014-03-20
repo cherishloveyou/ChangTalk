@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC11413018D9450600A57278 /* CSHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC11412F18D9450600A57278 /* CSHomeViewController.m */; };
+		CC11413618D9743500A57278 /* CSLeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC11413518D9743500A57278 /* CSLeftViewController.m */; };
+		CC11414218D9749F00A57278 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CC11413A18D9749F00A57278 /* MMDrawerBarButtonItem.m */; };
+		CC11414318D9749F00A57278 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC11413D18D9749F00A57278 /* MMDrawerController.m */; };
+		CC11414418D9749F00A57278 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = CC11413F18D9749F00A57278 /* MMDrawerVisualState.m */; };
+		CC11414518D9749F00A57278 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC11414118D9749F00A57278 /* UIViewController+MMDrawerController.m */; };
+		CC11414818D9835400A57278 /* CSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC11414718D9835400A57278 /* CSNavigationController.m */; };
+		CC11414B18D98FC300A57278 /* CSDrawerVisualStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC11414A18D98FC300A57278 /* CSDrawerVisualStateManager.m */; };
 		CC39E77418D8324100D2F4A6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC39E77318D8324100D2F4A6 /* Foundation.framework */; };
 		CC39E77618D8324100D2F4A6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC39E77518D8324100D2F4A6 /* CoreGraphics.framework */; };
 		CC39E77818D8324100D2F4A6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC39E77718D8324100D2F4A6 /* UIKit.framework */; };
@@ -34,6 +42,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC11412E18D9450600A57278 /* CSHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHomeViewController.h; sourceTree = "<group>"; };
+		CC11412F18D9450600A57278 /* CSHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHomeViewController.m; sourceTree = "<group>"; };
+		CC11413418D9743500A57278 /* CSLeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSLeftViewController.h; sourceTree = "<group>"; };
+		CC11413518D9743500A57278 /* CSLeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSLeftViewController.m; sourceTree = "<group>"; };
+		CC11413918D9749F00A57278 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
+		CC11413A18D9749F00A57278 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
+		CC11413B18D9749F00A57278 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
+		CC11413C18D9749F00A57278 /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
+		CC11413D18D9749F00A57278 /* MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerController.m; sourceTree = "<group>"; };
+		CC11413E18D9749F00A57278 /* MMDrawerVisualState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerVisualState.h; sourceTree = "<group>"; };
+		CC11413F18D9749F00A57278 /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
+		CC11414018D9749F00A57278 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
+		CC11414118D9749F00A57278 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
+		CC11414618D9835400A57278 /* CSNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNavigationController.h; sourceTree = "<group>"; };
+		CC11414718D9835400A57278 /* CSNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNavigationController.m; sourceTree = "<group>"; };
+		CC11414918D98FC300A57278 /* CSDrawerVisualStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSDrawerVisualStateManager.h; sourceTree = "<group>"; };
+		CC11414A18D98FC300A57278 /* CSDrawerVisualStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSDrawerVisualStateManager.m; sourceTree = "<group>"; };
 		CC39E77018D8324100D2F4A6 /* ChangTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChangTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC39E77318D8324100D2F4A6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CC39E77518D8324100D2F4A6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -79,6 +104,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC11412D18D9407C00A57278 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CC11414918D98FC300A57278 /* CSDrawerVisualStateManager.h */,
+				CC11414A18D98FC300A57278 /* CSDrawerVisualStateManager.m */,
+				CC11412E18D9450600A57278 /* CSHomeViewController.h */,
+				CC11412F18D9450600A57278 /* CSHomeViewController.m */,
+				CC11413418D9743500A57278 /* CSLeftViewController.h */,
+				CC11413518D9743500A57278 /* CSLeftViewController.m */,
+				CC11414618D9835400A57278 /* CSNavigationController.h */,
+				CC11414718D9835400A57278 /* CSNavigationController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CC11413718D9749F00A57278 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				CC11413818D9749F00A57278 /* MMDrawerController */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		CC11413818D9749F00A57278 /* MMDrawerController */ = {
+			isa = PBXGroup;
+			children = (
+				CC11413918D9749F00A57278 /* MMDrawerBarButtonItem.h */,
+				CC11413A18D9749F00A57278 /* MMDrawerBarButtonItem.m */,
+				CC11413B18D9749F00A57278 /* MMDrawerController+Subclass.h */,
+				CC11413C18D9749F00A57278 /* MMDrawerController.h */,
+				CC11413D18D9749F00A57278 /* MMDrawerController.m */,
+				CC11413E18D9749F00A57278 /* MMDrawerVisualState.h */,
+				CC11413F18D9749F00A57278 /* MMDrawerVisualState.m */,
+				CC11414018D9749F00A57278 /* UIViewController+MMDrawerController.h */,
+				CC11414118D9749F00A57278 /* UIViewController+MMDrawerController.m */,
+			);
+			path = MMDrawerController;
+			sourceTree = "<group>";
+		};
 		CC39E76718D8324100D2F4A6 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +176,8 @@
 		CC39E77918D8324100D2F4A6 /* ChangTalk */ = {
 			isa = PBXGroup;
 			children = (
+				CC11413718D9749F00A57278 /* Extention */,
+				CC11412D18D9407C00A57278 /* Controllers */,
 				CC39E78218D8324100D2F4A6 /* AppDelegate.h */,
 				CC39E78318D8324100D2F4A6 /* AppDelegate.m */,
 				CC39E78518D8324100D2F4A6 /* Main.storyboard */,
@@ -251,7 +317,15 @@
 			files = (
 				CC39E78A18D8324100D2F4A6 /* ViewController.m in Sources */,
 				CC39E78418D8324100D2F4A6 /* AppDelegate.m in Sources */,
+				CC11414318D9749F00A57278 /* MMDrawerController.m in Sources */,
+				CC11414818D9835400A57278 /* CSNavigationController.m in Sources */,
+				CC11414B18D98FC300A57278 /* CSDrawerVisualStateManager.m in Sources */,
+				CC11414518D9749F00A57278 /* UIViewController+MMDrawerController.m in Sources */,
+				CC11414418D9749F00A57278 /* MMDrawerVisualState.m in Sources */,
 				CC39E78018D8324100D2F4A6 /* main.m in Sources */,
+				CC11413018D9450600A57278 /* CSHomeViewController.m in Sources */,
+				CC11413618D9743500A57278 /* CSLeftViewController.m in Sources */,
+				CC11414218D9749F00A57278 /* MMDrawerBarButtonItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +450,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChangTalk/ChangTalk-Prefix.pch";
 				INFOPLIST_FILE = "ChangTalk/ChangTalk-Info.plist";
@@ -389,6 +464,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChangTalk/ChangTalk-Prefix.pch";
 				INFOPLIST_FILE = "ChangTalk/ChangTalk-Info.plist";
@@ -456,6 +532,7 @@
 				CC39E7A418D8324200D2F4A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CC39E7A518D8324200D2F4A6 /* Build configuration list for PBXNativeTarget "ChangTalkTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +541,7 @@
 				CC39E7A718D8324200D2F4A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
