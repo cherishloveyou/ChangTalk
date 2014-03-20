@@ -20,6 +20,7 @@
     if (self) {
         // Custom initialization
         self.view.backgroundColor = [UIColor grayColor];
+        //self.view
     }
     return self;
 }
