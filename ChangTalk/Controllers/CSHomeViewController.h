@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CSLoginViewController.h"
+#import "CSRegisterViewController.h"
+#import "SlideMenuItem/CSSlideSwitchView.h"
 
-@interface CSHomeViewController : UIViewController
+@interface CSHomeViewController : UIViewController<CSSlideSwitchViewDelegate>
+
+@property (nonatomic, strong) CSSlideSwitchView* slideView;
+@property (nonatomic, strong) CSLoginViewController* vc1;
+@property (nonatomic, strong) CSRegisterViewController* vc2;
 
 @end

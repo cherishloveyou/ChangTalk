@@ -23,37 +23,6 @@
             </objects>
             <point key="canvasLocation" x="-135" y="-168"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="m2N-PV-J6W">
-            <objects>
-                <navigationController storyboardIdentifier="CSNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="u5G-QK-Kw5" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="N1U-Vg-LvM">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="If1-Br-3Py" kind="push" id="zme-vi-Uol"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dba-Tx-ZhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-155" y="555"/>
-        </scene>
-        <!--View Controller - 消息-->
-        <scene sceneID="Vmc-zJ-Nqy">
-            <objects>
-                <viewController restorationIdentifier="CSHomeViewController" storyboardIdentifier="CSHomeViewController" id="If1-Br-3Py" sceneMemberID="viewController">
-                    <navigationBar key="view" contentMode="scaleToFill" id="GK9-Bx-LUF">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    </navigationBar>
-                    <navigationItem key="navigationItem" title="消息" prompt="提示" id="q5M-cJ-a2x">
-                        <barButtonItem key="backBarButtonItem" title="返回" id="Kgx-fE-0zu"/>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gtp-Mk-CBh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="283" y="561"/>
-        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

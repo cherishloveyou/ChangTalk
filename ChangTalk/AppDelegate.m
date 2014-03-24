@@ -43,7 +43,7 @@
     
     [navigationController setRestorationIdentifier:@"CSNavigationControllerRestorationKey"];
     
-    if(OSVersionIsAtLeastiOS7()){
+    if(OSVersionIsAtLeastiOS7){
 
         //UINavigationController * leftSideNavController = [[CSNavigationController alloc] initWithRootViewController:leftSideViewController];
 		//[leftSideNavController setRestorationIdentifier:@"CSLeftControllerRestorationKey"];
@@ -77,7 +77,7 @@
          }
      }];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    if(OSVersionIsAtLeastiOS7()){
+    if(OSVersionIsAtLeastiOS7){
         UIColor * tintColor = [UIColor colorWithRed:29.0/255.0
                                               green:173.0/255.0
                                                blue:234.0/255.0

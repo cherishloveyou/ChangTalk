@@ -28,6 +28,71 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+        self.modalPresentationCapturesStatusBarAppearance = NO;
+    }
+
+//    //选择自己喜欢的颜色
+//    UIColor * color = [UIColor whiteColor];
+//    //这里我们设置的是颜色，还可以设置shadow等，具体可以参见api
+//    NSDictionary * dict = [NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
+//    self.navigationController.navigationBar.titleTextAttributes = dict;
+    
+//   self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:68/255.f green:178/255.f blue:39/255.f alpha:0];
+    
+//    self.title = @"108社区";
+    
+    self.slideView.tabItemNormalColor = [CSSlideSwitchView colorFromHexRGB:@"868686"];
+    self.slideView.tabItemSelectedColor = [CSSlideSwitchView colorFromHexRGB:@"bb0b15"];
+    self.slideView.shadowImage = [[UIImage imageNamed:@"red_line_and_shadow.png"]
+                                        stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f];
+}
+
+
+#pragma mark - 滑动tab视图代理方法
+
+- (NSUInteger)numberOfTab:(CSSlideSwitchView *)view
+{
+    return 2;
+}
+
+- (UIViewController *)slideSwitchView:(CSSlideSwitchView *)view viewOfTab:(NSUInteger)number
+{
+    if (number == 0) {
+        return self.vc1;
+    } else if (number == 1) {
+        return self.vc2;
+    }else{
+        return nil;
+    }
+}
+
+- (void)slideSwitchView:(CSSlideSwitchView *)view panLeftEdge:(UIPanGestureRecognizer *)panParam
+{
+//    SUNViewController *drawerController = (CSSlideSwitchView *)self.navigationController.mm_drawerController;
+//    [drawerController panGestureCallback:panParam];
+}
+
+- (void)slideSwitchView:(CSSlideSwitchView *)view didselectTab:(NSUInteger)number
+{
+    //    SUNListViewController *vc = nil;
+    //    if (number == 0) {
+    //        vc = self.vc1;
+    //    } else if (number == 1) {
+    //        vc = self.vc2;
+    //    } else if (number == 2) {
+    //        vc = self.vc3;
+    //    } else if (number == 3) {
+    //        vc = self.vc4;
+    //    } else if (number == 4) {
+    //        vc = self.vc5;
+    //    } else if (number == 5) {
+    //        vc = self.vc6;
+    //    }
+    //    [vc viewDidCurrentView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,16 +100,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
