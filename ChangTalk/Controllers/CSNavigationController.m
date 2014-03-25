@@ -38,13 +38,12 @@
                                      }];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle{
-    if(OSVersionIsAtLeastiOS7){
-        return UIStatusBarStyleLightContent;
-    }
-    else {
-        return UIStatusBarStyleDefault;
-    }
-}
-
+//- (UIStatusBarStyle)preferredStatusBarStyle{
+//    if(OSVersionIsAtLeastiOS7){
+//        return UIStatusBarStyleLightContent;
+//    }
+//    else {
+//        return UIStatusBarStyleDefault;
+//    }
+//}
 @end

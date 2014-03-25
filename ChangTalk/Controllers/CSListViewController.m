@@ -33,7 +33,6 @@
     self.tableViewList.dataSource = self;
     [self.view addSubview:self.tableViewList];
     [self.tableViewList setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-
 }
 
 - (void)didReceiveMemoryWarning

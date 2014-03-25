@@ -43,6 +43,10 @@
 		CC39E79518D8324200D2F4A6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC39E77718D8324100D2F4A6 /* UIKit.framework */; };
 		CC39E79D18D8324200D2F4A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC39E79B18D8324200D2F4A6 /* InfoPlist.strings */; };
 		CC39E79F18D8324200D2F4A6 /* ChangTalkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC39E79E18D8324200D2F4A6 /* ChangTalkTests.m */; };
+		CC6B91E518E1699400960566 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6B91E218E1699400960566 /* Default-568h@2x.png */; };
+		CC6B91E718E1699400960566 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6B91E418E1699400960566 /* Default@2x.png */; };
+		CC6B91E918E175E400960566 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6B91E818E175E400960566 /* Default.png */; };
+		CC6B91EC18E17DAB00960566 /* CSNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6B91EB18E17DAB00960566 /* CSNewsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +124,11 @@
 		CC39E79A18D8324200D2F4A6 /* ChangTalkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChangTalkTests-Info.plist"; sourceTree = "<group>"; };
 		CC39E79C18D8324200D2F4A6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CC39E79E18D8324200D2F4A6 /* ChangTalkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangTalkTests.m; sourceTree = "<group>"; };
+		CC6B91E218E1699400960566 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		CC6B91E418E1699400960566 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		CC6B91E818E175E400960566 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		CC6B91EA18E17DAB00960566 /* CSNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNewsViewController.h; sourceTree = "<group>"; };
+		CC6B91EB18E17DAB00960566 /* CSNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNewsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +158,9 @@
 		CC09DE0518E1150D00807925 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CC6B91E818E175E400960566 /* Default.png */,
+				CC6B91E218E1699400960566 /* Default-568h@2x.png */,
+				CC6B91E418E1699400960566 /* Default@2x.png */,
 				CC09DE0618E1150D00807925 /* tab_line_shadow@2x.png */,
 			);
 			path = Resources;
@@ -172,6 +184,8 @@
 				CC30ABBD18DFDE37000D9BB9 /* CSRegisterViewController.m */,
 				CC09DE0218E10EB400807925 /* CSListViewController.h */,
 				CC09DE0318E10EB400807925 /* CSListViewController.m */,
+				CC6B91EA18E17DAB00960566 /* CSNewsViewController.h */,
+				CC6B91EB18E17DAB00960566 /* CSNewsViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -391,6 +405,9 @@
 				CC39E78C18D8324100D2F4A6 /* Images.xcassets in Resources */,
 				CC39E77E18D8324100D2F4A6 /* InfoPlist.strings in Resources */,
 				CC09DE0718E1150D00807925 /* tab_line_shadow@2x.png in Resources */,
+				CC6B91E518E1699400960566 /* Default-568h@2x.png in Resources */,
+				CC6B91E918E175E400960566 /* Default.png in Resources */,
+				CC6B91E718E1699400960566 /* Default@2x.png in Resources */,
 				CC39E78718D8324100D2F4A6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +439,7 @@
 				CC11414518D9749F00A57278 /* UIViewController+MMDrawerController.m in Sources */,
 				CC30ABD518DFFD5C000D9BB9 /* AFHTTPSessionManager.m in Sources */,
 				CC30ABD318DFFD5C000D9BB9 /* AFHTTPRequestOperation.m in Sources */,
+				CC6B91EC18E17DAB00960566 /* CSNewsViewController.m in Sources */,
 				CC30ABBE18DFDE37000D9BB9 /* CSRegisterViewController.m in Sources */,
 				CC30ABD718DFFD5C000D9BB9 /* AFSecurityPolicy.m in Sources */,
 				CC11414418D9749F00A57278 /* MMDrawerVisualState.m in Sources */,

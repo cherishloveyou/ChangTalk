@@ -47,7 +47,6 @@ static const NSUInteger kTagOfRightSideButton = 999;
     _viewArray = [[NSMutableArray alloc] init];
     
     _isBuildUI = NO;
-    
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder

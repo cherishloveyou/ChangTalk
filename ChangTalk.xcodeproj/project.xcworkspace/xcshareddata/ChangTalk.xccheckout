@@ -5,31 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-<<<<<<< HEAD
-	<string>7642A027-E031-4CD8-AAF8-7C0E676ED7BF</string>
-=======
-	<string>D34932F7-C3F5-4C01-A59B-DC29C1397736</string>
->>>>>>> FETCH_HEAD
+	<string>5A6FC23C-22FC-4AA3-B0EB-A1D742898B72</string>
 	<key>IDESourceControlProjectName</key>
 	<string>ChangTalk</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-<<<<<<< HEAD
 		<key>977E1173-4B71-4EB5-A553-DED98BDE04DE</key>
-=======
-		<key>82DD4128-B671-45D6-B884-54E27A2F8FAC</key>
->>>>>>> FETCH_HEAD
 		<string>https://github.com/cherishloveyou/ChangTalk.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ChangTalk.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-<<<<<<< HEAD
 		<key>977E1173-4B71-4EB5-A553-DED98BDE04DE</key>
-=======
-		<key>82DD4128-B671-45D6-B884-54E27A2F8FAC</key>
->>>>>>> FETCH_HEAD
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -37,22 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-<<<<<<< HEAD
 	<string>977E1173-4B71-4EB5-A553-DED98BDE04DE</string>
-=======
-	<string>82DD4128-B671-45D6-B884-54E27A2F8FAC</string>
->>>>>>> FETCH_HEAD
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-<<<<<<< HEAD
 			<string>977E1173-4B71-4EB5-A553-DED98BDE04DE</string>
-=======
-			<string>82DD4128-B671-45D6-B884-54E27A2F8FAC</string>
->>>>>>> FETCH_HEAD
 			<key>IDESourceControlWCCName</key>
 			<string>ChangTalk</string>
 		</dict>

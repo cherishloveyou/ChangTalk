@@ -30,13 +30,13 @@
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UIViewController * leftSideViewController = [[CSLeftViewController alloc] init];
+    UIViewController *leftSideViewController = [[CSLeftViewController alloc] init];
     
-    UIViewController * centerViewController = [[CSHomeViewController alloc] init];
+    UIViewController *centerViewController = [[CSHomeViewController alloc] init];
     
-    //UIViewController * rightSideDrawerViewController = [[RightSideDrawerViewController alloc] init];
+    //UIViewController *rightSideDrawerViewController = [[RightSideDrawerViewController alloc] init];
     
-    UINavigationController * navigationController = [[CSNavigationController alloc] initWithRootViewController:centerViewController];
+    UINavigationController *navigationController = [[CSNavigationController alloc] initWithRootViewController:centerViewController];
     
     if ([navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)])
         [navigationController.navigationBar setBarTintColor:[UIColor greenColor]];
@@ -45,7 +45,7 @@
     
     if(OSVersionIsAtLeastiOS7){
 
-        //UINavigationController * leftSideNavController = [[CSNavigationController alloc] initWithRootViewController:leftSideViewController];
+        //UINavigationController *leftSideNavController = [[CSNavigationController alloc] initWithRootViewController:leftSideViewController];
 		//[leftSideNavController setRestorationIdentifier:@"CSLeftControllerRestorationKey"];
         
         self.drawerController = [[MMDrawerController alloc]
@@ -93,7 +93,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    //[application setStatusBarStyle:UIStatusBarStyleLightContent];//黑体白字
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];//
+    [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     return YES;
 }
 							
