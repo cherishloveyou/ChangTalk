@@ -20,6 +20,7 @@
     if (self) {
         // Custom initialization
         self.view.backgroundColor = [UIColor whiteColor];
+        self.title = @"108社区";
     }
     return self;
 }
@@ -43,12 +44,27 @@
     
 //   self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:68/255.f green:178/255.f blue:39/255.f alpha:0];
     
-//    self.title = @"108社区";
+
+    _slideView = [[CSSlideSwitchView alloc]initWithFrame:self.view.bounds];
+    
+    self.slideView.slideSwitchViewDelegate = self;
     
     self.slideView.tabItemNormalColor = [CSSlideSwitchView colorFromHexRGB:@"868686"];
     self.slideView.tabItemSelectedColor = [CSSlideSwitchView colorFromHexRGB:@"bb0b15"];
-    self.slideView.shadowImage = [[UIImage imageNamed:@"red_line_and_shadow.png"]
+    self.slideView.shadowImage = [[UIImage imageNamed:@"tab_line_shadow.png"]
                                         stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f];
+    
+    self.vc1 = [[CSListViewController alloc] init];
+    self.vc1.title = @"今日有料";
+    
+    self.vc2 = [[CSRegisterViewController alloc] init];
+    self.vc2.title = @"大家在聊";
+    
+    //self.slideView.userInteractionEnabled = YES;
+
+    [self.view addSubview:self.slideView];
+    
+    [self.slideView buildUI];
 }
 
 

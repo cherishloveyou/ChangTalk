@@ -7,12 +7,10 @@
 //
 
 #import "CSLeftViewController.h"
+#import "UIViewController+MMDrawerController.h"
 #import "CSLoginViewController.h"
-#import "AFNetworking.h"
+#import "CSListViewController.h"
 
-
-//@param username  password
-#define kAPI_LOGINID  @"http://login.tc108.org:807/login/mobile.aspx"
 
 @interface CSLeftViewController ()
 
@@ -72,7 +70,6 @@
     });
 }
 
-
 #pragma mark - UITableView Delegate
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -115,25 +112,16 @@
 
     if (indexPath.section == 0 && indexPath.row == 0) {
 
-        //test login api
+        CSLoginViewController *loginController = [[CSLoginViewController alloc] init];
         
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    @"ct408", @"username",@"qwerty",@"password",nil];
-        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-        //@{@"username": @"password"};
-        [manager POST:kAPI_LOGINID parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"Success: %@", responseObject);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-        }];
-       
-        //CSLoginViewController *loginController = [[CSLoginViewController alloc] init];
+        UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:loginController];
         
-        //UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:loginController];
-        
-        //[self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
-    } else {
+        [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
+    } else if (indexPath.section == 0 && indexPath.row == 1){
+        CSListViewController* listController = [[CSListViewController alloc]init];
+        UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:listController];
+        [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
+    }else{
         
     }
 }

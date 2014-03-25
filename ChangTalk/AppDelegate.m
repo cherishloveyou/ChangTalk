@@ -56,14 +56,14 @@
     }
     else{
         self.drawerController = [[MMDrawerController alloc]
-                                 initWithCenterViewController:centerViewController
+                                 initWithCenterViewController:navigationController
                                  leftDrawerViewController:leftSideViewController
                                  rightDrawerViewController:nil];
     }
-    [self.drawerController setRestorationIdentifier:@"MMDrawer"];
     
-    [self.drawerController setMaximumLeftDrawerWidth:kSlideMenuWidth];
+    [self.drawerController setRestorationIdentifier:@"MMDrawer"];
     [self.drawerController setShowsShadow:YES];
+    [self.drawerController setMaximumLeftDrawerWidth:kSlideMenuWidth];
     [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
@@ -76,6 +76,7 @@
              block(drawerController, drawerSide, percentVisible);
          }
      }];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     if(OSVersionIsAtLeastiOS7){
         UIColor * tintColor = [UIColor colorWithRed:29.0/255.0
@@ -92,7 +93,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [application setStatusBarStyle:UIStatusBarStyleLightContent];//黑体白字
+    //[application setStatusBarStyle:UIStatusBarStyleLightContent];//黑体白字
     return YES;
 }
 							

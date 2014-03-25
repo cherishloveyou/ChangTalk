@@ -17,6 +17,3 @@
 
 #define OSVersionIsAtLeastiOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
-//static BOOL OSVersionIsAtLeastiOS7() {
-//    return (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1);
-//}

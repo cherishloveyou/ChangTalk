@@ -36,12 +36,12 @@
     self.title = @"登陆";
     self.view.backgroundColor = [UIColor redColor];
     
+    //test login api
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                 @"ct408", @"username",@"qwerty",@"password",nil];
-  
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     //@{@"username": @"password"};
-    
     [manager POST:kAPI_LOGINID parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

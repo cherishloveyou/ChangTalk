@@ -7,6 +7,7 @@
 //
 
 #import "CSNavigationController.h"
+#import "UIViewController+MMDrawerController.h"
 
 @interface CSNavigationController ()
 
@@ -14,36 +15,36 @@
 
 @implementation CSNavigationController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+#pragma mark 一个类只会调用一次
++ (void)initialize
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    // 1.取出设置主题的对象
+    UINavigationBar *navigationBar = [UINavigationBar appearance];
+    
+//    // 2.设置导航栏的背景图片
+//    NSString *navBarBg = nil;
+//    if (OSVersionIsAtLeastiOS7) { // iOS7
+//        navBarBg = @"NavBar64";
+//        navigationBar.tintColor = [UIColor whiteColor];
+//    } else { // 非iOS7
+//        navBarBg = @"NavBar";
+//        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackOpaque;
+//    }
+//    [navigationBar setBackgroundImage:[UIImage imageNamed:navBarBg] forBarMetrics:UIBarMetricsDefault];
+    
+    // 3.标题
+    [navigationBar setTitleTextAttributes:@{
+                                     NSForegroundColorAttributeName : [UIColor whiteColor]
+                                     }];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    if(OSVersionIsAtLeastiOS7){
+        return UIStatusBarStyleLightContent;
     }
-    return self;
+    else {
+        return UIStatusBarStyleDefault;
+    }
 }
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

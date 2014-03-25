@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC09DE0418E10EB400807925 /* CSListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC09DE0318E10EB400807925 /* CSListViewController.m */; };
+		CC09DE0718E1150D00807925 /* tab_line_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC09DE0618E1150D00807925 /* tab_line_shadow@2x.png */; };
 		CC11413018D9450600A57278 /* CSHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC11412F18D9450600A57278 /* CSHomeViewController.m */; };
 		CC11413618D9743500A57278 /* CSLeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC11413518D9743500A57278 /* CSLeftViewController.m */; };
 		CC11414218D9749F00A57278 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CC11413A18D9749F00A57278 /* MMDrawerBarButtonItem.m */; };
@@ -54,6 +56,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC09DE0218E10EB400807925 /* CSListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSListViewController.h; sourceTree = "<group>"; };
+		CC09DE0318E10EB400807925 /* CSListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSListViewController.m; sourceTree = "<group>"; };
+		CC09DE0618E1150D00807925 /* tab_line_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_line_shadow@2x.png"; sourceTree = "<group>"; };
 		CC11412E18D9450600A57278 /* CSHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHomeViewController.h; sourceTree = "<group>"; };
 		CC11412F18D9450600A57278 /* CSHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHomeViewController.m; sourceTree = "<group>"; };
 		CC11413418D9743500A57278 /* CSLeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSLeftViewController.h; sourceTree = "<group>"; };
@@ -141,6 +146,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC09DE0518E1150D00807925 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CC09DE0618E1150D00807925 /* tab_line_shadow@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		CC11412D18D9407C00A57278 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +170,8 @@
 				CC30ABBA18DFDE07000D9BB9 /* CSLoginViewController.m */,
 				CC30ABBC18DFDE37000D9BB9 /* CSRegisterViewController.h */,
 				CC30ABBD18DFDE37000D9BB9 /* CSRegisterViewController.m */,
+				CC09DE0218E10EB400807925 /* CSListViewController.h */,
+				CC09DE0318E10EB400807925 /* CSListViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -254,6 +269,7 @@
 		CC39E77918D8324100D2F4A6 /* ChangTalk */ = {
 			isa = PBXGroup;
 			children = (
+				CC09DE0518E1150D00807925 /* Resources */,
 				CC11413718D9749F00A57278 /* Extention */,
 				CC11412D18D9407C00A57278 /* Controllers */,
 				CC39E78218D8324100D2F4A6 /* AppDelegate.h */,
@@ -374,6 +390,7 @@
 			files = (
 				CC39E78C18D8324100D2F4A6 /* Images.xcassets in Resources */,
 				CC39E77E18D8324100D2F4A6 /* InfoPlist.strings in Resources */,
+				CC09DE0718E1150D00807925 /* tab_line_shadow@2x.png in Resources */,
 				CC39E78718D8324100D2F4A6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +428,7 @@
 				CC30ABD618DFFD5C000D9BB9 /* AFNetworkReachabilityManager.m in Sources */,
 				CC30ABDB18DFFD5C000D9BB9 /* AFURLSessionManager.m in Sources */,
 				CC39E78018D8324100D2F4A6 /* main.m in Sources */,
+				CC09DE0418E10EB400807925 /* CSListViewController.m in Sources */,
 				CC30ABBB18DFDE07000D9BB9 /* CSLoginViewController.m in Sources */,
 				CC11413018D9450600A57278 /* CSHomeViewController.m in Sources */,
 				CC11413618D9743500A57278 /* CSLeftViewController.m in Sources */,
