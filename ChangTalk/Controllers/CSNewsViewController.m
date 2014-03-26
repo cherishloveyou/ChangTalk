@@ -7,6 +7,7 @@
 //
 
 #import "CSNewsViewController.h"
+#import "NewsTableViewCell.h"
 
 @interface CSNewsViewController ()
 
@@ -19,6 +20,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"今日有料";
     }
     return self;
 }
@@ -27,6 +29,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _tableViewList = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableViewList.delegate = self;
+    self.tableViewList.dataSource = self;
+    [self.view addSubview:self.tableViewList];
+    [self.tableViewList setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,15 +43,32 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+#pragma mark - UITableView Delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    return 1;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 3;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 64;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"NewsCellIdentifier";
+    NewsTableViewCell *cell = (NewsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"NewsTableViewCell" owner:self options:nil] lastObject];
+    }
+    [cell configNewsCellWithContent];
+    return  cell;
+}
+
 
 @end

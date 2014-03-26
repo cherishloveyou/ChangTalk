@@ -10,6 +10,7 @@
 #import "UIViewController+MMDrawerController.h"
 #import "CSLoginViewController.h"
 #import "CSListViewController.h"
+#import "CSNewsViewController.h"
 
 
 @interface CSLeftViewController ()
@@ -124,6 +125,10 @@
         [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
     } else if (indexPath.section == 0 && indexPath.row == 1){
         CSListViewController* listController = [[CSListViewController alloc]init];
+        UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:listController];
+        [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
+    }else if (indexPath.section == 0 && indexPath.row == 2){
+        CSNewsViewController* listController = [[CSNewsViewController alloc]init];
         UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:listController];
         [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
     }else{

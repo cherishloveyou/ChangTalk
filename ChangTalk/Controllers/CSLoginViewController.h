@@ -10,4 +10,6 @@
 
 @interface CSLoginViewController : UIViewController
 
+@property (nonatomic,strong)NSDictionary* userDict;
+
 @end

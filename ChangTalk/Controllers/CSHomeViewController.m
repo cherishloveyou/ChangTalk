@@ -54,10 +54,10 @@
     self.slideView.shadowImage = [[UIImage imageNamed:@"tab_line_shadow.png"]
                                         stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f];
     
-    self.vc1 = [[CSListViewController alloc] init];
+    self.vc1 = [[CSNewsViewController alloc] init];
     self.vc1.title = @"今日有料";
     
-    self.vc2 = [[CSRegisterViewController alloc] init];
+    self.vc2 = [[CSListViewController alloc] init];
     self.vc2.title = @"大家在聊";
     
     //self.slideView.userInteractionEnabled = YES;

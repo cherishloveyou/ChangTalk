@@ -19,7 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"今日有料";
+        self.title = @"大家在聊";
     }
     return self;
 }
@@ -47,7 +47,6 @@
 }
 
 #pragma mark - UITableView Delegate
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;

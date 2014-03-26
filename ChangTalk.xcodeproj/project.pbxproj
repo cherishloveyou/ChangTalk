@@ -47,6 +47,11 @@
 		CC6B91E718E1699400960566 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6B91E418E1699400960566 /* Default@2x.png */; };
 		CC6B91E918E175E400960566 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6B91E818E175E400960566 /* Default.png */; };
 		CC6B91EC18E17DAB00960566 /* CSNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6B91EB18E17DAB00960566 /* CSNewsViewController.m */; };
+		CC6BB92618E25DB4009CD9B5 /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6BB92418E25DB4009CD9B5 /* NewsTableViewCell.m */; };
+		CCCFAC6B18E2B5D300EDA9FB /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCFAC6418E2B5D300EDA9FB /* AESCrypt.m */; };
+		CCCFAC6C18E2B5D300EDA9FB /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCFAC6618E2B5D300EDA9FB /* NSData+Base64.m */; };
+		CCCFAC6D18E2B5D300EDA9FB /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCFAC6818E2B5D300EDA9FB /* NSData+CommonCrypto.m */; };
+		CCCFAC6E18E2B5D300EDA9FB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCFAC6A18E2B5D300EDA9FB /* NSString+Base64.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +134,16 @@
 		CC6B91E818E175E400960566 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		CC6B91EA18E17DAB00960566 /* CSNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNewsViewController.h; sourceTree = "<group>"; };
 		CC6B91EB18E17DAB00960566 /* CSNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNewsViewController.m; sourceTree = "<group>"; };
+		CC6BB92318E25DB4009CD9B5 /* NewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsTableViewCell.h; path = ChangTalk/Controllers/NewsTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		CC6BB92418E25DB4009CD9B5 /* NewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsTableViewCell.m; path = ChangTalk/Controllers/NewsTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		CCCFAC6318E2B5D300EDA9FB /* AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESCrypt.h; sourceTree = "<group>"; };
+		CCCFAC6418E2B5D300EDA9FB /* AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCrypt.m; sourceTree = "<group>"; };
+		CCCFAC6518E2B5D300EDA9FB /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		CCCFAC6618E2B5D300EDA9FB /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		CCCFAC6718E2B5D300EDA9FB /* NSData+CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CommonCrypto.h"; sourceTree = "<group>"; };
+		CCCFAC6818E2B5D300EDA9FB /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
+		CCCFAC6918E2B5D300EDA9FB /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
+		CCCFAC6A18E2B5D300EDA9FB /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +201,8 @@
 				CC09DE0318E10EB400807925 /* CSListViewController.m */,
 				CC6B91EA18E17DAB00960566 /* CSNewsViewController.h */,
 				CC6B91EB18E17DAB00960566 /* CSNewsViewController.m */,
+				CC6BB92318E25DB4009CD9B5 /* NewsTableViewCell.h */,
+				CC6BB92418E25DB4009CD9B5 /* NewsTableViewCell.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -193,6 +210,7 @@
 		CC11413718D9749F00A57278 /* Extention */ = {
 			isa = PBXGroup;
 			children = (
+				CCCFAC6218E2B5D300EDA9FB /* Encrypt */,
 				CC30ABBF18DFFD5C000D9BB9 /* AFNetworking */,
 				CC11413818D9749F00A57278 /* MMDrawerController */,
 			);
@@ -326,6 +344,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CCCFAC6218E2B5D300EDA9FB /* Encrypt */ = {
+			isa = PBXGroup;
+			children = (
+				CCCFAC6318E2B5D300EDA9FB /* AESCrypt.h */,
+				CCCFAC6418E2B5D300EDA9FB /* AESCrypt.m */,
+				CCCFAC6518E2B5D300EDA9FB /* NSData+Base64.h */,
+				CCCFAC6618E2B5D300EDA9FB /* NSData+Base64.m */,
+				CCCFAC6718E2B5D300EDA9FB /* NSData+CommonCrypto.h */,
+				CCCFAC6818E2B5D300EDA9FB /* NSData+CommonCrypto.m */,
+				CCCFAC6918E2B5D300EDA9FB /* NSString+Base64.h */,
+				CCCFAC6A18E2B5D300EDA9FB /* NSString+Base64.m */,
+			);
+			path = Encrypt;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -443,14 +476,19 @@
 				CC30ABBE18DFDE37000D9BB9 /* CSRegisterViewController.m in Sources */,
 				CC30ABD718DFFD5C000D9BB9 /* AFSecurityPolicy.m in Sources */,
 				CC11414418D9749F00A57278 /* MMDrawerVisualState.m in Sources */,
+				CCCFAC6B18E2B5D300EDA9FB /* AESCrypt.m in Sources */,
+				CCCFAC6C18E2B5D300EDA9FB /* NSData+Base64.m in Sources */,
 				CC30ABD618DFFD5C000D9BB9 /* AFNetworkReachabilityManager.m in Sources */,
 				CC30ABDB18DFFD5C000D9BB9 /* AFURLSessionManager.m in Sources */,
 				CC39E78018D8324100D2F4A6 /* main.m in Sources */,
 				CC09DE0418E10EB400807925 /* CSListViewController.m in Sources */,
 				CC30ABBB18DFDE07000D9BB9 /* CSLoginViewController.m in Sources */,
+				CCCFAC6D18E2B5D300EDA9FB /* NSData+CommonCrypto.m in Sources */,
+				CCCFAC6E18E2B5D300EDA9FB /* NSString+Base64.m in Sources */,
 				CC11413018D9450600A57278 /* CSHomeViewController.m in Sources */,
 				CC11413618D9743500A57278 /* CSLeftViewController.m in Sources */,
 				CC30ABDA18DFFD5C000D9BB9 /* AFURLResponseSerialization.m in Sources */,
+				CC6BB92618E25DB4009CD9B5 /* NewsTableViewCell.m in Sources */,
 				CC11414218D9749F00A57278 /* MMDrawerBarButtonItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CSNewsViewController : UIViewController
+@interface CSNewsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *tableViewList;
 
 @end
