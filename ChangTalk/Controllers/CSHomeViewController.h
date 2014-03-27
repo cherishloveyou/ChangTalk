@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CSNewsViewController.h"
 #import "CSListViewController.h"
-#import "SlideMenuItem/CSSlideSwitchView.h"
+#import "CSSlideSwitchView.h"
 
 @interface CSHomeViewController : UIViewController<CSSlideSwitchViewDelegate>
 
