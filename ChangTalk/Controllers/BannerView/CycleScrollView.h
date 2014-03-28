@@ -10,7 +10,6 @@
 
 @interface CycleScrollView : UIView
 
-@property (nonatomic , readonly) UIScrollView *scrollView;
 /**
  *  初始化
  *

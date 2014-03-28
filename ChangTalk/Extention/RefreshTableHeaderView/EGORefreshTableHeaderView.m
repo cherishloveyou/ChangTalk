@@ -25,7 +25,7 @@
 //
 
 #import "EGORefreshTableHeaderView.h"
-//#import "NSDate+TimeAgo.h"
+#import "NSDate+TimeAgo.h"
 
 #define TEXT_COLOR	 [UIColor colorWithRed:87.0/255.0 green:108.0/255.0 blue:137.0/255.0 alpha:1.0]
 #define FLIP_ANIMATION_DURATION 0.18f
@@ -84,7 +84,7 @@
 #pragma mark Setters
 
 - (void)refreshLastUpdatedDate {
-    //_lastUpdatedLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(@"Last Updated: ", "Last Updated"), [self.lastRefreshDate timeAgo]];
+    _lastUpdatedLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(@"Last Updated: ", "Last Updated"), [self.lastRefreshDate timeAgo]];
     [[NSUserDefaults standardUserDefaults] setObject:_lastUpdatedLabel.text forKey:@"EGORefreshTableView_LastRefresh"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

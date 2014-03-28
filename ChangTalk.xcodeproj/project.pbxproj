@@ -64,6 +64,7 @@
 		CC4952C018E4206200796020 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4952BE18E4206200796020 /* EGORefreshTableHeaderView.m */; };
 		CC4952C518E42B8A00796020 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4952C318E42B8A00796020 /* NSDate+TimeAgo.m */; };
 		CC4952C618E42B8A00796020 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CC4952C418E42B8A00796020 /* NSDateTimeAgo.bundle */; };
+		CC5A742D18E53B1100A6EF32 /* NewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5A742C18E53B1100A6EF32 /* NewsItem.m */; };
 		CC6B91E518E1699400960566 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6B91E218E1699400960566 /* Default-568h@2x.png */; };
 		CC6B91E718E1699400960566 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6B91E418E1699400960566 /* Default@2x.png */; };
 		CC6B91E918E175E400960566 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6B91E818E175E400960566 /* Default.png */; };
@@ -191,6 +192,9 @@
 		CC4952C218E42B8A00796020 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		CC4952C318E42B8A00796020 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		CC4952C418E42B8A00796020 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
+		CC5A742B18E53B1100A6EF32 /* NewsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsItem.h; sourceTree = "<group>"; };
+		CC5A742C18E53B1100A6EF32 /* NewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsItem.m; sourceTree = "<group>"; };
+		CC5A743218E552A400A6EF32 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		CC6B91E218E1699400960566 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CC6B91E418E1699400960566 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		CC6B91E818E175E400960566 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -348,6 +352,7 @@
 		CC39E77218D8324100D2F4A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CC5A743218E552A400A6EF32 /* libicucore.dylib */,
 				CC39E77318D8324100D2F4A6 /* Foundation.framework */,
 				CC39E77518D8324100D2F4A6 /* CoreGraphics.framework */,
 				CC39E77718D8324100D2F4A6 /* UIKit.framework */,
@@ -359,9 +364,10 @@
 		CC39E77918D8324100D2F4A6 /* ChangTalk */ = {
 			isa = PBXGroup;
 			children = (
-				CC09DE0518E1150D00807925 /* Resources */,
-				CC11413718D9749F00A57278 /* Extention */,
 				CC11412D18D9407C00A57278 /* Controllers */,
+				CC11413718D9749F00A57278 /* Extention */,
+				CC5A742A18E53B1100A6EF32 /* Model */,
+				CC09DE0518E1150D00807925 /* Resources */,
 				CC39E78218D8324100D2F4A6 /* AppDelegate.h */,
 				CC39E78318D8324100D2F4A6 /* AppDelegate.m */,
 				CC39E78518D8324100D2F4A6 /* Main.storyboard */,
@@ -477,6 +483,15 @@
 				CC4952C418E42B8A00796020 /* NSDateTimeAgo.bundle */,
 			);
 			path = NSDateTimeAgo;
+			sourceTree = "<group>";
+		};
+		CC5A742A18E53B1100A6EF32 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CC5A742B18E53B1100A6EF32 /* NewsItem.h */,
+				CC5A742C18E53B1100A6EF32 /* NewsItem.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		CCCFAC6218E2B5D300EDA9FB /* Encrypt */ = {
@@ -640,6 +655,7 @@
 				CC49529918E3C6AC00796020 /* UIImage+WebP.m in Sources */,
 				CC11413018D9450600A57278 /* CSHomeViewController.m in Sources */,
 				CC49526918E3BC4800796020 /* CycleScrollView.m in Sources */,
+				CC5A742D18E53B1100A6EF32 /* NewsItem.m in Sources */,
 				CC11413618D9743500A57278 /* CSLeftViewController.m in Sources */,
 				CC30ABDA18DFFD5C000D9BB9 /* AFURLResponseSerialization.m in Sources */,
 				CC6BB92618E25DB4009CD9B5 /* NewsTableViewCell.m in Sources */,

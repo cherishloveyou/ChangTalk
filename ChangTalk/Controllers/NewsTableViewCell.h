@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewsItem.h"
 
 @interface NewsTableViewCell : UITableViewCell
 
@@ -14,6 +15,6 @@
 @property (nonatomic, strong)UILabel *newsTitleLabel;
 @property (nonatomic, strong)UILabel *newsCommentNum;
 
-- (void)configNewsCellWithContent;
+- (void)configNewsCellWithContent:(NewsItem*)item;
 
 @end

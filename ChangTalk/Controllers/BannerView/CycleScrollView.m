@@ -15,7 +15,7 @@
 @property (nonatomic, assign) NSInteger totalPageCount;
 @property (nonatomic, strong) NSMutableArray *contentViews;
 @property (nonatomic, strong) UIScrollView *scrollView;
-
+@property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) NSTimer *animationTimer;
 @property (nonatomic, assign) NSTimeInterval animationDuration;
 
@@ -29,6 +29,7 @@
     if (_totalPageCount > 0) {
         [self configContentViews];
         [self.animationTimer resumeTimerAfterTimeInterval:self.animationDuration];
+        _pageControl.numberOfPages = _totalPageCount;
     }
 }
 
@@ -61,6 +62,13 @@
         self.scrollView.pagingEnabled = YES;
         [self addSubview:self.scrollView];
         self.currentPageIndex = 0;
+        
+        _pageControl = [[UIPageControl alloc]initWithFrame: CGRectMake(self.frame.size.width-80, self.frame.size.height-20, 60, 20)];
+        [_pageControl setBackgroundColor:[UIColor clearColor]];
+        [_pageControl setUserInteractionEnabled:NO];
+        [_pageControl setPageIndicatorTintColor:[UIColor whiteColor]];
+        [_pageControl setCurrentPageIndicatorTintColor:[UIColor greenColor]];
+        [self addSubview:_pageControl];
     }
     return self;
 }
@@ -136,11 +144,13 @@
     if(contentOffsetX >= (2 * CGRectGetWidth(scrollView.frame))) {
         self.currentPageIndex = [self getValidNextPageIndexWithPageIndex:self.currentPageIndex + 1];
         NSLog(@"next，当前页:%d",self.currentPageIndex);
+        _pageControl.currentPage = self.currentPageIndex;
         [self configContentViews];
     }
     if(contentOffsetX <= 0) {
         self.currentPageIndex = [self getValidNextPageIndexWithPageIndex:self.currentPageIndex - 1];
         NSLog(@"previous，当前页:%d",self.currentPageIndex);
+        _pageControl.currentPage = self.currentPageIndex;
         [self configContentViews];
     }
 }

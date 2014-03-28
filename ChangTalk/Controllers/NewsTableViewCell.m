@@ -7,6 +7,7 @@
 //
 
 #import "NewsTableViewCell.h"
+#import "UIImageView+WebCache.h"
 
 @implementation NewsTableViewCell
 
@@ -15,17 +16,20 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        _newsImageView = [[UIImageView alloc]initWithFrame:CGRectMake(2, 2, 64, 54)];
+        _newsImageView = [[UIImageView alloc]initWithFrame:CGRectMake(4, 4, 72, 54)];
         _newsImageView.backgroundColor = [UIColor redColor];
         [self.contentView addSubview:_newsImageView];
         
-        _newsTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 2, 200, 32)];
-        _newsTitleLabel.font = [UIFont systemFontOfSize:24];
-        _newsTitleLabel.textColor = [UIColor greenColor];
+        _newsTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 2, 200, 48)];
+        _newsTitleLabel.font = [UIFont systemFontOfSize:14];
+        _newsTitleLabel.textColor = [UIColor blackColor];
+        _newsTitleLabel.numberOfLines = 2;
         [self.contentView addSubview:_newsTitleLabel];
         
-        _newsCommentNum = [[UILabel alloc]initWithFrame:CGRectMake(600, 40, 200, 12)];
-        _newsCommentNum.textColor = [UIColor greenColor];
+        _newsCommentNum = [[UILabel alloc]initWithFrame:CGRectMake(280, 48, 40, 12)];
+        _newsCommentNum.font = [UIFont systemFontOfSize:10];
+        _newsCommentNum.textAlignment = NSTextAlignmentRight;
+        _newsCommentNum.textColor = [UIColor lightGrayColor];
         [self.contentView addSubview:_newsCommentNum];
     }
     return self;
@@ -43,10 +47,24 @@
     // Configure the view for the selected state
 }
 
-- (void)configNewsCellWithContent
+- (void)startDownloadNewsImage
 {
-    _newsImageView.image = [UIImage imageNamed:@"Default.png"];
-    _newsTitleLabel.text = @"新闻标题";
-    _newsCommentNum.text = @"100";
+    //if (_newsImageView)
+    //    [_avatarImageView setImageWithURL:[NSURL URLWithString:_authorImageURL] placeholderImage:[UIImage imageNamed:@"thumb_avatar.png"]];
+    //if (_imageURL)
+    //    [_pictureImageView setImageWithURL:[NSURL URLWithString:_imageURL] placeholderImage:[UIImage imageNamed:@"thumb_pic.png"]];
+    //[self downloadImageFromURL:[NSURL URLWithString:_imageURL] withPlaceHolderImage:[UIImage imageNamed:@"thumb_pic.png"] ForImageView:_pictureImageView];
+}
+
+
+- (void)configNewsCellWithContent:(NewsItem*)item
+{
+
+    _newsTitleLabel.text = item.newsTitle;
+    _newsCommentNum.text = [NSString stringWithFormat:@"%d评论",item.commentCount];
+    //图片
+    if (item.newsImageUrl) {
+        [_newsImageView setImageWithURL:[NSURL URLWithString:item.newsImageUrl] placeholderImage:[UIImage imageNamed:@"placeholderImage.png"]];
+    }
 }
 @end
