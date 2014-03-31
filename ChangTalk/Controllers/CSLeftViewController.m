@@ -11,6 +11,7 @@
 #import "CSLoginViewController.h"
 #import "CSListViewController.h"
 #import "CSNewsViewController.h"
+#import "CSProfileViewController.h"
 
 
 @interface CSLeftViewController ()
@@ -44,13 +45,12 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 80, 80)];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        imageView.image = [UIImage imageNamed:@"avatar.jpg"];
+        imageView.image = [UIImage imageNamed:@"userHead.jpg"];
         imageView.backgroundColor = [UIColor redColor];
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = 40.0f;
         imageView.layer.borderWidth = 3.0f;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-
         imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         imageView.layer.shouldRasterize = YES;
         imageView.clipsToBounds = YES;
@@ -129,6 +129,10 @@
         [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
     }else if (indexPath.section == 0 && indexPath.row == 2){
         CSNewsViewController* listController = [[CSNewsViewController alloc]init];
+        UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:listController];
+        [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
+    }else if (indexPath.section == 1 && indexPath.row == 0){
+        CSProfileViewController* listController = [[CSProfileViewController alloc]init];
         UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:listController];
         [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
     }else{

@@ -64,6 +64,7 @@
 		CC4952C018E4206200796020 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4952BE18E4206200796020 /* EGORefreshTableHeaderView.m */; };
 		CC4952C518E42B8A00796020 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4952C318E42B8A00796020 /* NSDate+TimeAgo.m */; };
 		CC4952C618E42B8A00796020 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CC4952C418E42B8A00796020 /* NSDateTimeAgo.bundle */; };
+		CC58EA9518E902B600F295D1 /* CSNewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC58EA9418E902B600F295D1 /* CSNewsDetailViewController.m */; };
 		CC5A742D18E53B1100A6EF32 /* NewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5A742C18E53B1100A6EF32 /* NewsItem.m */; };
 		CC6B91E518E1699400960566 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6B91E218E1699400960566 /* Default-568h@2x.png */; };
 		CC6B91E718E1699400960566 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6B91E418E1699400960566 /* Default@2x.png */; };
@@ -74,6 +75,13 @@
 		CCCFAC6C18E2B5D300EDA9FB /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCFAC6618E2B5D300EDA9FB /* NSData+Base64.m */; };
 		CCCFAC6D18E2B5D300EDA9FB /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCFAC6818E2B5D300EDA9FB /* NSData+CommonCrypto.m */; };
 		CCCFAC6E18E2B5D300EDA9FB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCFAC6A18E2B5D300EDA9FB /* NSString+Base64.m */; };
+		CCD87E9018E93F7300B9CEF4 /* CSMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD87E8F18E93F7300B9CEF4 /* CSMessageViewController.m */; };
+		CCD87E9318E93FB000B9CEF4 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD87E9218E93FB000B9CEF4 /* MessageTableViewCell.m */; };
+		CCD87E9D18E950DE00B9CEF4 /* UIImage+BlurEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD87E9C18E950DE00B9CEF4 /* UIImage+BlurEffects.m */; };
+		CCD87EA418E958FA00B9CEF4 /* CSProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD87EA318E958FA00B9CEF4 /* CSProfileViewController.m */; };
+		CCD87EA718E9595700B9CEF4 /* CSHeadCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD87EA618E9595700B9CEF4 /* CSHeadCoverView.m */; };
+		CCD87EAC18E961B400B9CEF4 /* profile@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CCD87EAA18E961B400B9CEF4 /* profile@2x.jpg */; };
+		CCD87EAD18E961B400B9CEF4 /* userHead@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CCD87EAB18E961B400B9CEF4 /* userHead@2x.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,9 +200,10 @@
 		CC4952C218E42B8A00796020 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		CC4952C318E42B8A00796020 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		CC4952C418E42B8A00796020 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
+		CC58EA9318E902B600F295D1 /* CSNewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNewsDetailViewController.h; sourceTree = "<group>"; };
+		CC58EA9418E902B600F295D1 /* CSNewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNewsDetailViewController.m; sourceTree = "<group>"; };
 		CC5A742B18E53B1100A6EF32 /* NewsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsItem.h; sourceTree = "<group>"; };
 		CC5A742C18E53B1100A6EF32 /* NewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsItem.m; sourceTree = "<group>"; };
-		CC5A743218E552A400A6EF32 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		CC6B91E218E1699400960566 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CC6B91E418E1699400960566 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		CC6B91E818E175E400960566 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -210,6 +219,18 @@
 		CCCFAC6818E2B5D300EDA9FB /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
 		CCCFAC6918E2B5D300EDA9FB /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
 		CCCFAC6A18E2B5D300EDA9FB /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
+		CCD87E8E18E93F7300B9CEF4 /* CSMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSMessageViewController.h; path = ../CSMessageViewController.h; sourceTree = "<group>"; };
+		CCD87E8F18E93F7300B9CEF4 /* CSMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSMessageViewController.m; path = ../CSMessageViewController.m; sourceTree = "<group>"; };
+		CCD87E9118E93FB000B9CEF4 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
+		CCD87E9218E93FB000B9CEF4 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
+		CCD87E9B18E950DE00B9CEF4 /* UIImage+BlurEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BlurEffects.h"; sourceTree = "<group>"; };
+		CCD87E9C18E950DE00B9CEF4 /* UIImage+BlurEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BlurEffects.m"; sourceTree = "<group>"; };
+		CCD87EA218E958FA00B9CEF4 /* CSProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSProfileViewController.h; sourceTree = "<group>"; };
+		CCD87EA318E958FA00B9CEF4 /* CSProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSProfileViewController.m; sourceTree = "<group>"; };
+		CCD87EA518E9595700B9CEF4 /* CSHeadCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHeadCoverView.h; sourceTree = "<group>"; };
+		CCD87EA618E9595700B9CEF4 /* CSHeadCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHeadCoverView.m; sourceTree = "<group>"; };
+		CCD87EAA18E961B400B9CEF4 /* profile@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "profile@2x.jpg"; sourceTree = "<group>"; };
+		CCD87EAB18E961B400B9CEF4 /* userHead@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "userHead@2x.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +260,8 @@
 		CC09DE0518E1150D00807925 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CCD87EAA18E961B400B9CEF4 /* profile@2x.jpg */,
+				CCD87EAB18E961B400B9CEF4 /* userHead@2x.jpg */,
 				CC49529B18E3C94C00796020 /* placeholderImage.png */,
 				CC6B91E818E175E400960566 /* Default.png */,
 				CC6B91E218E1699400960566 /* Default-568h@2x.png */,
@@ -251,6 +274,7 @@
 		CC11412D18D9407C00A57278 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CCD87EA118E958FA00B9CEF4 /* ProfileView */,
 				CC49526B18E3C1C400796020 /* SlideTopMenu */,
 				CC49526418E3BC4800796020 /* BannerView */,
 				CC11414918D98FC300A57278 /* CSDrawerVisualStateManager.h */,
@@ -271,6 +295,12 @@
 				CC6B91EB18E17DAB00960566 /* CSNewsViewController.m */,
 				CC6BB92318E25DB4009CD9B5 /* NewsTableViewCell.h */,
 				CC6BB92418E25DB4009CD9B5 /* NewsTableViewCell.m */,
+				CC58EA9318E902B600F295D1 /* CSNewsDetailViewController.h */,
+				CC58EA9418E902B600F295D1 /* CSNewsDetailViewController.m */,
+				CCD87E8E18E93F7300B9CEF4 /* CSMessageViewController.h */,
+				CCD87E8F18E93F7300B9CEF4 /* CSMessageViewController.m */,
+				CCD87E9118E93FB000B9CEF4 /* MessageTableViewCell.h */,
+				CCD87E9218E93FB000B9CEF4 /* MessageTableViewCell.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -278,6 +308,7 @@
 		CC11413718D9749F00A57278 /* Extention */ = {
 			isa = PBXGroup;
 			children = (
+				CCD87E9418E9500400B9CEF4 /* UIImage */,
 				CC4952C118E42B8A00796020 /* NSDateTimeAgo */,
 				CC4952BA18E4206200796020 /* RefreshTableHeaderView */,
 				CC49526F18E3C6AC00796020 /* SDWebImage */,
@@ -352,7 +383,6 @@
 		CC39E77218D8324100D2F4A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CC5A743218E552A400A6EF32 /* libicucore.dylib */,
 				CC39E77318D8324100D2F4A6 /* Foundation.framework */,
 				CC39E77518D8324100D2F4A6 /* CoreGraphics.framework */,
 				CC39E77718D8324100D2F4A6 /* UIKit.framework */,
@@ -509,6 +539,26 @@
 			path = Encrypt;
 			sourceTree = "<group>";
 		};
+		CCD87E9418E9500400B9CEF4 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				CCD87E9B18E950DE00B9CEF4 /* UIImage+BlurEffects.h */,
+				CCD87E9C18E950DE00B9CEF4 /* UIImage+BlurEffects.m */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		CCD87EA118E958FA00B9CEF4 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				CCD87EA218E958FA00B9CEF4 /* CSProfileViewController.h */,
+				CCD87EA318E958FA00B9CEF4 /* CSProfileViewController.m */,
+				CCD87EA518E9595700B9CEF4 /* CSHeadCoverView.h */,
+				CCD87EA618E9595700B9CEF4 /* CSHeadCoverView.m */,
+			);
+			path = ProfileView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -589,7 +639,9 @@
 				CC39E77E18D8324100D2F4A6 /* InfoPlist.strings in Resources */,
 				CC09DE0718E1150D00807925 /* tab_line_shadow@2x.png in Resources */,
 				CC6B91E518E1699400960566 /* Default-568h@2x.png in Resources */,
+				CCD87EAC18E961B400B9CEF4 /* profile@2x.jpg in Resources */,
 				CC6B91E918E175E400960566 /* Default.png in Resources */,
+				CCD87EAD18E961B400B9CEF4 /* userHead@2x.jpg in Resources */,
 				CC49529C18E3C94C00796020 /* placeholderImage.png in Resources */,
 				CC4952C618E42B8A00796020 /* NSDateTimeAgo.bundle in Resources */,
 				CC6B91E718E1699400960566 /* Default@2x.png in Resources */,
@@ -612,11 +664,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC58EA9518E902B600F295D1 /* CSNewsDetailViewController.m in Sources */,
 				CC4952C518E42B8A00796020 /* NSDate+TimeAgo.m in Sources */,
 				CC39E78A18D8324100D2F4A6 /* ViewController.m in Sources */,
 				CC39E78418D8324100D2F4A6 /* AppDelegate.m in Sources */,
 				CC49526E18E3C1C400796020 /* CSSlideSwitchView.m in Sources */,
 				CC30ABD418DFFD5C000D9BB9 /* AFHTTPRequestOperationManager.m in Sources */,
+				CCD87E9318E93FB000B9CEF4 /* MessageTableViewCell.m in Sources */,
 				CC11414318D9749F00A57278 /* MMDrawerController.m in Sources */,
 				CC30ABD818DFFD5C000D9BB9 /* AFURLConnectionOperation.m in Sources */,
 				CC49526A18E3BC4800796020 /* NSTimer+Addition.m in Sources */,
@@ -642,7 +696,9 @@
 				CC11414418D9749F00A57278 /* MMDrawerVisualState.m in Sources */,
 				CCCFAC6B18E2B5D300EDA9FB /* AESCrypt.m in Sources */,
 				CCCFAC6C18E2B5D300EDA9FB /* NSData+Base64.m in Sources */,
+				CCD87EA418E958FA00B9CEF4 /* CSProfileViewController.m in Sources */,
 				CC30ABD618DFFD5C000D9BB9 /* AFNetworkReachabilityManager.m in Sources */,
+				CCD87E9D18E950DE00B9CEF4 /* UIImage+BlurEffects.m in Sources */,
 				CC30ABDB18DFFD5C000D9BB9 /* AFURLSessionManager.m in Sources */,
 				CC39E78018D8324100D2F4A6 /* main.m in Sources */,
 				CC09DE0418E10EB400807925 /* CSListViewController.m in Sources */,
@@ -654,6 +710,7 @@
 				CCCFAC6E18E2B5D300EDA9FB /* NSString+Base64.m in Sources */,
 				CC49529918E3C6AC00796020 /* UIImage+WebP.m in Sources */,
 				CC11413018D9450600A57278 /* CSHomeViewController.m in Sources */,
+				CCD87EA718E9595700B9CEF4 /* CSHeadCoverView.m in Sources */,
 				CC49526918E3BC4800796020 /* CycleScrollView.m in Sources */,
 				CC5A742D18E53B1100A6EF32 /* NewsItem.m in Sources */,
 				CC11413618D9743500A57278 /* CSLeftViewController.m in Sources */,
@@ -661,6 +718,7 @@
 				CC6BB92618E25DB4009CD9B5 /* NewsTableViewCell.m in Sources */,
 				CC11414218D9749F00A57278 /* MMDrawerBarButtonItem.m in Sources */,
 				CC49529A18E3C6AC00796020 /* UIImageView+WebCache.m in Sources */,
+				CCD87E9018E93F7300B9CEF4 /* CSMessageViewController.m in Sources */,
 				CC49528F18E3C6AC00796020 /* SDImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

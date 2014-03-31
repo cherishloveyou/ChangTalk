@@ -23,6 +23,7 @@
 @interface CSNewsViewController ()
 {
     EGORefreshTableHeaderView* _refreshHeaderView;
+    BOOL _reloading;
 }
 
 @property (nonatomic, strong) CycleScrollView *bannerView;
@@ -171,8 +172,7 @@
         [_refreshHeaderView removeFromSuperview];
     }
 	_refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:
-                          CGRectMake(0.0f, 60.0f - self.view.bounds.size.height,
-                                     self.view.frame.size.width, self.view.bounds.size.height)];
+                          CGRectMake(0.0f, -CGRectGetHeight(_tableViewList.bounds), CGRectGetWidth(self.view.frame), CGRectGetHeight(_tableViewList.bounds))];
     _refreshHeaderView.delegate = self;
     
 	[_tableViewList addSubview:_refreshHeaderView];
@@ -194,6 +194,7 @@
 	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:_tableViewList];
 	
 }
+
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view
 {
     [self reloadTableViewDataSource];

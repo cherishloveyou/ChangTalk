@@ -26,7 +26,7 @@
         _newsTitleLabel.numberOfLines = 2;
         [self.contentView addSubview:_newsTitleLabel];
         
-        _newsCommentNum = [[UILabel alloc]initWithFrame:CGRectMake(280, 48, 40, 12)];
+        _newsCommentNum = [[UILabel alloc]initWithFrame:CGRectMake(260, 48, 56, 12)];
         _newsCommentNum.font = [UIFont systemFontOfSize:10];
         _newsCommentNum.textAlignment = NSTextAlignmentRight;
         _newsCommentNum.textColor = [UIColor lightGrayColor];
