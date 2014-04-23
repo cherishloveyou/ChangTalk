@@ -33,7 +33,7 @@
     
     UIButton *_rigthSideButton;                     //右侧按钮
     
-    __weak id<CSSlideSwitchViewDelegate> _slideSwitchViewDelegate;
+    __weak id<CSSlideSwitchViewDelegate> _slideDelegate;
 }
 
 @property (nonatomic, strong) UIScrollView *rootScrollView;
@@ -41,7 +41,7 @@
 @property (nonatomic, assign) CGFloat userContentOffsetX;
 @property (nonatomic, assign) NSInteger userSelectedChannelID;
 @property (nonatomic, assign) NSInteger scrollViewSelectedChannelID;
-@property (nonatomic, weak) id<CSSlideSwitchViewDelegate> slideSwitchViewDelegate;
+@property (nonatomic, weak) id<CSSlideSwitchViewDelegate> slideDelegate;
 @property (nonatomic, strong) UIColor *tabItemNormalColor;
 @property (nonatomic, strong) UIColor *tabItemSelectedColor;
 @property (nonatomic, strong) UIImage *tabItemNormalBackgroundImage;

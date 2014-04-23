@@ -7,6 +7,11 @@
 //
 
 #import "CSListViewController.h"
+#import "CSHomeViewController.h"
+#import "CSNavigationController.h"
+#import "CSContentViewController.h"
+#import "CSNewsDetailViewController.h"
+#import "UIViewController+MMDrawerController.h"
 
 @interface CSListViewController ()
 
@@ -41,11 +46,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidCurrentView
-{
-    
-}
-
 #pragma mark - UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -70,4 +70,14 @@
     return  cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    CSContentViewController *detailController = [[CSContentViewController alloc] init];
+//    detailController.newsid = 8877 + indexPath.row;
+//    
+//    MMDrawerController *parentController = (MMDrawerController *)self.view.window.rootViewController;
+//    CSNavigationController *nav = (CSNavigationController*)parentController.centerViewController;
+//    
+//    [nav pushViewController:detailController animated:YES];
+}
 @end

@@ -12,6 +12,4 @@
 
 @property (nonatomic, strong) UITableView *tableViewList;
 
-- (void)viewDidCurrentView;
-
 @end

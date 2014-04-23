@@ -7,6 +7,7 @@
 //
 
 #import "CSHomeViewController.h"
+#import "CSPublishViewController.h"
 
 @interface CSHomeViewController ()
 
@@ -19,7 +20,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.view.backgroundColor = [UIColor whiteColor];
+        //self.view.backgroundColor = [UIColor whiteColor];
         self.title = @"108社区";
     }
     return self;
@@ -36,40 +37,36 @@
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
 
-//    //选择自己喜欢的颜色
-//    UIColor * color = [UIColor whiteColor];
-//    //这里我们设置的是颜色，还可以设置shadow等，具体可以参见api
-//    NSDictionary * dict = [NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
-//    self.navigationController.navigationBar.titleTextAttributes = dict;
-    
-//   self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:68/255.f green:178/255.f blue:39/255.f alpha:0];
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(clickEditView:)];
 
     _slideView = [[CSSlideSwitchView alloc]initWithFrame:self.view.bounds];
     
-    self.slideView.slideSwitchViewDelegate = self;
-    
+    self.slideView.slideDelegate = self;
     self.slideView.tabItemNormalColor = [CSSlideSwitchView colorFromHexRGB:@"868686"];
     self.slideView.tabItemSelectedColor = [CSSlideSwitchView colorFromHexRGB:@"bb0b15"];
     self.slideView.shadowImage = [[UIImage imageNamed:@"tab_line_shadow.png"]
                                         stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f];
     
-    self.vc1 = [[CSNewsViewController alloc] init];
-    self.vc1.title = @"今日有料";
+    self.vc1 = [[CSNewsViewController alloc]init];
+    //self.vc2 = [[CSListViewController alloc]init];
+    self.vc2 = [[CSTweetViewController alloc]init];
     
-    self.vc2 = [[CSListViewController alloc] init];
-    self.vc2.title = @"大家在聊";
-    
-    //self.slideView.userInteractionEnabled = YES;
-
     [self.view addSubview:self.slideView];
     
     [self.slideView buildUI];
 }
 
+- (void)clickEditView:(id)sender
+{
+    CSPublishViewController* postController = [[CSPublishViewController alloc]init];
+    CSNavigationController* nav = [[CSNavigationController alloc]initWithRootViewController:postController];
+    //[self.navigationController pushViewController:postController animated:YES];
+    [self presentViewController:nav animated:YES completion:^{
+        debugLog(@"edit tweet view!");
+    }];
+}
 
 #pragma mark - 滑动tab视图代理方法
-
 - (NSUInteger)numberOfTab:(CSSlideSwitchView *)view
 {
     return 2;
@@ -94,21 +91,7 @@
 
 - (void)slideSwitchView:(CSSlideSwitchView *)view didselectTab:(NSUInteger)number
 {
-    //    SUNListViewController *vc = nil;
-    //    if (number == 0) {
-    //        vc = self.vc1;
-    //    } else if (number == 1) {
-    //        vc = self.vc2;
-    //    } else if (number == 2) {
-    //        vc = self.vc3;
-    //    } else if (number == 3) {
-    //        vc = self.vc4;
-    //    } else if (number == 4) {
-    //        vc = self.vc5;
-    //    } else if (number == 5) {
-    //        vc = self.vc6;
-    //    }
-    //    [vc viewDidCurrentView];
+
 }
 
 - (void)didReceiveMemoryWarning

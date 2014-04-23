@@ -8,10 +8,16 @@
 
 #import "CSLeftViewController.h"
 #import "UIViewController+MMDrawerController.h"
+#import "CSNavigationController.h"
 #import "CSLoginViewController.h"
 #import "CSListViewController.h"
 #import "CSNewsViewController.h"
 #import "CSProfileViewController.h"
+#import "CSSettingViewController.h"
+#import "CSContentViewController.h"
+#import "CSCommentViewController.h"
+#import "CSSectionViewController.h"
+#import "CSPublishViewController.h"
 
 
 @interface CSLeftViewController ()
@@ -133,7 +139,17 @@
         [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
     }else if (indexPath.section == 1 && indexPath.row == 0){
         CSProfileViewController* listController = [[CSProfileViewController alloc]init];
+        CSNavigationController *navigationController = [[CSNavigationController alloc]initWithRootViewController:listController];
+        [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
+    }else if (indexPath.section == 1 && indexPath.row == 1){
+        //CSSettingViewController* listController = [[CSSettingViewController alloc]init];
+        CSCommentViewController* listController = [[CSCommentViewController alloc]init];
         UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:listController];
+        [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
+    }else if (indexPath.section == 1 && indexPath.row == 2){
+        //CSCommentViewController* listController = [[CSCommentViewController alloc]init];
+        CSSectionViewController* listController = [[CSSectionViewController alloc]init];
+        CSNavigationController *navigationController = [[CSNavigationController alloc]initWithRootViewController:listController];
         [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
     }else{
         

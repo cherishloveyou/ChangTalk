@@ -7,23 +7,23 @@
 //
 
 #import "CSNewsViewController.h"
+#import "CSNavigationController.h"
 #import "NewsTableViewCell.h"
 #import "CycleScrollView.h"
-#import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 #import "EGORefreshTableHeaderView.h"
+#import "CSContentViewController.h"
+#import "MMDrawerController.h"
 #import "NewsItem.h"
-
-#define kAPI_SLIDE  @"http://mtalksvc.tc108.org:831/api/AHome/GetRecommendInfo?siteID=1"
-
-#define kAPI_NEWS(index,size)  [NSString stringWithFormat:@"http://mtalksvc.tc108.org:831/API/ATalk/GetInfoRecommendList?siteID=1&pageIndex=%d&pageSize=%d",index,size]
-
-//#define kAPI_NEWSPIC(site)  @"http://photoshow.tc108.org:814%@"
 
 @interface CSNewsViewController ()
 {
     EGORefreshTableHeaderView* _refreshHeaderView;
+    EGORefreshTableFooterView* _refreshFooterView;
     BOOL _reloading;
+    BOOL _isloadOver;
+    NSInteger pageIndex;
 }
 
 @property (nonatomic, strong) CycleScrollView *bannerView;
@@ -41,6 +41,7 @@
     if (self) {
         // Custom initialization
         self.title = @"今日有料";
+    
     }
     return self;
 }
@@ -55,24 +56,34 @@
     [self.view addSubview:self.tableViewList];
     [self.tableViewList setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     
+    pageIndex = 1;
     _bannerData = [[NSMutableArray alloc]initWithCapacity:20];
     _newsData = [[NSMutableArray alloc] initWithCapacity:20];
+    
     [self createRefreshHeaderView];
-
-    _bannerView = [[CycleScrollView alloc] initWithFrame: CGRectMake(0, 0, 320, 124) animationDuration:4.0];
+    
+    _bannerView = [[CycleScrollView alloc] initWithFrame: CGRectMake(0, 0, 320, 144) animationDuration:4.0];
     _tableViewList.tableHeaderView = _bannerView;
     
     //
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:kAPI_SLIDE parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //debugLog(@"JSON: %@", responseObject);
+    [manager GET:kAPI_SLIDE(2) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //debugLog(@"slide JSON: %@", responseObject);
         //NSArray* slidesArray = [responseObject objectForKey:@"Slides"];
         //[self.bannerData addObjectsFromArray:slidesArray];
         [_bannerData addObjectsFromArray:[responseObject objectForKey:@"Slides"]];
-        debugLog(@"bannerViewData:%@",_bannerData);
+        NSArray *array = [responseObject objectForKey:@"InfoList"];
+        if (array) {
+            for (id dicItem in array) {
+                //NSDictionary *dicItem = [array objectAtIndex:i];
+                NewsItem *item = [[NewsItem alloc] initWithDictionary:dicItem];
+                [_newsData addObject:item];
+            }
+        }
+        //debugLog(@"bannerViewData:%@",_bannerData);
         NSMutableArray *viewsArray = [@[] mutableCopy];
         for (int i = 0; i < [_bannerData count]; ++i) {
-            UIImageView* tempView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 124)];
+            UIImageView* tempView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 144)];
             [tempView setImageWithURL:[NSURL URLWithString:[_bannerData[i] objectForKey:@"ImgUrl"]] placeholderImage:[UIImage imageNamed:@"placeholderImage.png"]];
             
             UILabel* tempLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(tempView.frame)-20, 320, 20)];
@@ -83,23 +94,21 @@
             [viewsArray addObject:tempView];
         }
         
-        _bannerView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
-            return viewsArray[pageIndex];
+        _bannerView.fetchContentViewAtIndex = ^UIView *(NSInteger curIndex){
+            return viewsArray[curIndex];
         };
         _bannerView.totalPagesCount = ^NSInteger(void){
             return [viewsArray count];
         };
-        _bannerView.TapActionBlock = ^(NSInteger pageIndex){
-            debugLog(@"点击了第%d个",pageIndex);
+        _bannerView.TapActionBlock = ^(NSInteger curIndex){
+            debugLog(@"点击了第%d个",curIndex);
         };
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         debugLog(@"Error: %@", error);
     }];
-    
-    [self refreshNewsData:YES];
-    [self getPicSite];
-
+    //
+    [self reLoadNewsData:YES];
 }
 
 - (void)getPicSite
@@ -122,52 +131,69 @@
     {
         str1 = [str substringWithRange:b.range];
         NSLog(@" str 1 is %@",str1);
-        
     }
 }
-
-
-- (void)refreshNewsData:(BOOL)isRefresh
+//初始化数据
+- (void)clearData
+{
+    pageIndex = 1;
+    [_newsData removeAllObjects];
+}
+- (void)refreshNewsData
+{
+    if (1) {
+        [self reLoadNewsData:NO];
+    }   //无网络连接则读取缓存
+    else {
+    }
+}
+- (void)reLoadNewsData:(BOOL)noRefresh
 {
     //如果有网络连接,刷新数据
     if (1) {
-        
+        //如果加载完毕
+        if (_isloadOver) {
+            return;
+        }
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager GET:kAPI_NEWS(1,15) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
-            
+        [manager GET:kAPI_NEWS(pageIndex,0) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //debugLog(@"NewsJSON: %@", responseObject);
+            //如果是刷新数据，那么久清空数据集
+            if(!noRefresh){
+                [self clearData];
+            }
             @try {
-                if(isRefresh){
-                    [_newsData removeAllObjects];
-                }
                 NSArray *array = [responseObject objectForKey:@"InfoList"];
                 if (array) {
                     for (id dicItem in array) {
-                        //NSDictionary *dicItem = [array objectAtIndex:i];
                         NewsItem *item = [[NewsItem alloc] initWithDictionary:dicItem];
                         [_newsData addObject:item];
                     }
                 }
                 //[_newsData addObjectsFromArray:[responseObject objectForKey:@"InfoList"]];
                 [_tableViewList reloadData];
+                [self doneLoadingTableViewData];
             }
             @catch (NSException *exception) {
                 //[NdUncaughtExceptionHandler TakeException:exception];
             }
             @finally {
-                //[self doneLoadingTableViewData];
+                [self doneLoadingTableViewData];
             }
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
             //alert network error
+            [self doneLoadingTableViewData];
+            
         }];
     }else{
         //如果没有网络连接读取缓存
     }
 }
 
-- (void)createRefreshHeaderView{
+- (void)createRefreshHeaderView
+{
     if (_refreshHeaderView && [_refreshHeaderView superview]) {
         [_refreshHeaderView removeFromSuperview];
     }
@@ -180,41 +206,123 @@
     [_refreshHeaderView refreshLastUpdatedDate];
 }
 
-- (void)reloadTableViewDataSource{
-	
-	//  should be calling your tableviews data source model to reload
-	//  put here just for demo
-	_refreshHeaderView.loading = YES;
+- (void)createRefreshFooterView
+{
+    if (_refreshFooterView && [_refreshFooterView superview]) {
+        [_refreshFooterView removeFromSuperview];
+    }
+    CGFloat height = MAX(_tableViewList.contentSize.height, _tableViewList.frame.size.height);
+    if (_refreshFooterView && [_refreshFooterView superview])
+	{
+        // reset position
+        _refreshFooterView.frame = CGRectMake(0.0f,
+                                              height,
+                                              CGRectGetWidth(self.view.frame),
+                                              self.view.bounds.size.height);
+    }else{
+        // create the footerView
+        _refreshFooterView = [[EGORefreshTableFooterView alloc] initWithFrame:
+                              CGRectMake(0.0f, height,CGRectGetWidth(self.view.frame), self.view.bounds.size.height)];
+        _refreshFooterView.delegate = self;
+        [_tableViewList addSubview:_refreshFooterView];
+    }
+    
+    if (_refreshFooterView)
+	{
+        [_refreshFooterView refreshLastUpdatedDate];
+    }
+}
+
+- (void)removeFooterView
+{
+    if (_refreshFooterView && [_refreshFooterView superview])
+	{
+        [_refreshFooterView removeFromSuperview];
+    }
+    _refreshFooterView = nil;
 }
 
 - (void)doneLoadingTableViewData{
 	
 	//  model should call this when its done loading
-    _refreshHeaderView.loading = NO;
-	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:_tableViewList];
+    [self finishReloadingData];
+    [self createRefreshFooterView];
+}
+
+- (void)beginToReloadData:(EGORefreshType)aRefreshType{
 	
+	//  should be calling your tableviews data source model to reload
+	_reloading = YES;
+    
+    if (aRefreshType == EGORefreshHeader)
+	{
+        // pull down to refresh data
+        [self refreshNewsData];
+    }else if(aRefreshType == EGORefreshFooter){
+        // pull up to load more data
+        pageIndex++;
+        //[self performSelector:@selector(getNextPageView) withObject:nil afterDelay:2.0];
+        [self reLoadNewsData:YES];
+    }
+	// overide, the actual loading data operation is done in the subclass
 }
 
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view
+- (void)finishReloadingData
 {
-    [self reloadTableViewDataSource];
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+	//  model should call this when its done loading
+	_reloading = NO;
+    
+	if (_refreshHeaderView) {
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:_tableViewList];
+    }
+    
+    if (_refreshFooterView) {
+        [_refreshFooterView egoRefreshScrollViewDataSourceDidFinishedLoading:_tableViewList];
+        [self createRefreshFooterView];
+    }
+    // overide, the actula reloading tableView operation and reseting position operation is done in the subclass
+}
+#pragma mark - EGORefreshTable Delegate
+- (BOOL)egoRefreshTableDataSourceIsLoading:(UIView*)view
+{
+    return _reloading;
 }
 
-#pragma mark - UIScrollViewDelegate Methods
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+- (void)egoRefreshTableDidTriggerRefresh:(EGORefreshType)aRefreshType
 {
-    [_refreshHeaderView egoRefreshScrollViewWillBeginScroll:scrollView];
+    [self beginToReloadData:aRefreshType];
 }
+
+#pragma mark - UIScrollView Delegate
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+//{
+//    [_refreshHeaderView egoRefreshScrollViewWillBeginScroll:scrollView];
+//}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+	if (_refreshHeaderView)
+	{
+        [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    }
+	
+	if (_refreshFooterView)
+	{
+        [_refreshFooterView egoRefreshScrollViewDidScroll:scrollView];
+    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+	if (_refreshHeaderView)
+	{
+        [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    }
+	
+	if (_refreshFooterView)
+	{
+        [_refreshFooterView egoRefreshScrollViewDidEndDragging:scrollView];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -248,6 +356,8 @@
         cell = [[NewsTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     if ([_newsData count] > 0) {
         [((NewsTableViewCell *)cell) configNewsCellWithContent:[_newsData objectAtIndex:indexPath.row]];
         //if (_tableViewList.dragging == NO && _tableViewList.decelerating == NO)
@@ -256,5 +366,16 @@
     return  cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CSContentViewController *detailController = [[CSContentViewController alloc] init];
+    NewsItem* item = [_newsData objectAtIndex:indexPath.row];
+    detailController.articleID = item.newsID;
+    
+    MMDrawerController *parentController = (MMDrawerController *)self.view.window.rootViewController;
+    CSNavigationController *nav = (CSNavigationController*)parentController.centerViewController;
+    
+    [nav pushViewController:detailController animated:YES];
+}
 
 @end

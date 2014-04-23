@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "EGORefreshTableHeaderView.h"
+#import "EGORefreshTableFooterView.h"
 
-@interface CSNewsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate>
+@interface CSNewsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,EGORefreshTableDelegate>
 
 @property (nonatomic, strong) UITableView *tableViewList;
 

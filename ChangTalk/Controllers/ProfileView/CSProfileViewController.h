@@ -10,4 +10,6 @@
 
 @interface CSProfileViewController : UITableViewController
 
+@property (nonatomic, strong) NSString* uName;
+
 @end

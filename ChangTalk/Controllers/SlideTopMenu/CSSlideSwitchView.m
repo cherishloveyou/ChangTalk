@@ -22,7 +22,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
     //创建顶部可滑动的tab
     _topScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, kHeightOfTopScrollView)];
     _topScrollView.delegate = self;
-    _topScrollView.backgroundColor = [UIColor clearColor];
+    _topScrollView.backgroundColor = [UIColor whiteColor];
     _topScrollView.pagingEnabled = NO;
     _topScrollView.showsHorizontalScrollIndicator = NO;
     _topScrollView.showsVerticalScrollIndicator = NO;
@@ -31,7 +31,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
     _userSelectedChannelID = 100;
     
     //创建主滚动视图
-    _rootScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kHeightOfTopScrollView, self.bounds.size.width, self.bounds.size.height - kHeightOfTopScrollView)];
+    _rootScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kHeightOfTopScrollView, self.bounds.size.width, self.bounds.size.height - kHeightOfTopScrollView -64)];
     _rootScrollView.delegate = self;
     _rootScrollView.pagingEnabled = YES;
     _rootScrollView.userInteractionEnabled = YES;
@@ -122,17 +122,17 @@ static const NSUInteger kTagOfRightSideButton = 999;
  */
 - (void)buildUI
 {
-    NSUInteger number = [self.slideSwitchViewDelegate numberOfTab:self];
+    NSUInteger number = [self.slideDelegate numberOfTab:self];
     for (int i=0; i<number; i++) {
-        UIViewController *vc = [self.slideSwitchViewDelegate slideSwitchView:self viewOfTab:i];
+        UIViewController *vc = [self.slideDelegate slideSwitchView:self viewOfTab:i];
         [_viewArray addObject:vc];
         [_rootScrollView addSubview:vc.view];
     }
     [self createNameButtons];
     
     //选中第一个view
-    if (self.slideSwitchViewDelegate && [self.slideSwitchViewDelegate respondsToSelector:@selector(slideSwitchView:didselectTab:)]) {
-        [self.slideSwitchViewDelegate slideSwitchView:self didselectTab:_userSelectedChannelID - 100];
+    if (self.slideDelegate && [self.slideDelegate respondsToSelector:@selector(slideSwitchView:didselectTab:)]) {
+        [self.slideDelegate slideSwitchView:self didselectTab:_userSelectedChannelID - 100];
     }
     
     _isBuildUI = YES;
@@ -232,8 +232,8 @@ static const NSUInteger kTagOfRightSideButton = 999;
                 }
                 _isRootScroll = NO;
                 
-                if (self.slideSwitchViewDelegate && [self.slideSwitchViewDelegate respondsToSelector:@selector(slideSwitchView:didselectTab:)]) {
-                    [self.slideSwitchViewDelegate slideSwitchView:self didselectTab:_userSelectedChannelID - 100];
+                if (self.slideDelegate && [self.slideDelegate respondsToSelector:@selector(slideSwitchView:didselectTab:)]) {
+                    [self.slideDelegate slideSwitchView:self didselectTab:_userSelectedChannelID - 100];
                 }
             }
         }];
@@ -308,20 +308,19 @@ static const NSUInteger kTagOfRightSideButton = 999;
 {
     //当滑道左边界时，传递滑动事件给代理
     if(_rootScrollView.contentOffset.x <= 0) {
-        if (self.slideSwitchViewDelegate
-            && [self.slideSwitchViewDelegate respondsToSelector:@selector(slideSwitchView:panLeftEdge:)]) {
-            [self.slideSwitchViewDelegate slideSwitchView:self panLeftEdge:panParam];
+        if (self.slideDelegate
+            && [self.slideDelegate respondsToSelector:@selector(slideSwitchView:panLeftEdge:)]) {
+            [self.slideDelegate slideSwitchView:self panLeftEdge:panParam];
         }
     } else if(_rootScrollView.contentOffset.x >= _rootScrollView.contentSize.width - _rootScrollView.bounds.size.width) {
-        if (self.slideSwitchViewDelegate
-            && [self.slideSwitchViewDelegate respondsToSelector:@selector(slideSwitchView:panRightEdge:)]) {
-            [self.slideSwitchViewDelegate slideSwitchView:self panRightEdge:panParam];
+        if (self.slideDelegate
+            && [self.slideDelegate respondsToSelector:@selector(slideSwitchView:panRightEdge:)]) {
+            [self.slideDelegate slideSwitchView:self panRightEdge:panParam];
         }
     }
 }
 
 #pragma mark - 工具方法
-
 /*!
  * @method 通过16进制计算颜色
  * @abstract

@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CSLoginViewController : UIViewController
+@interface CSLoginViewController : UIViewController<UIGestureRecognizerDelegate>
+
+@property (strong, nonatomic) UIView *usernameView;
+@property (strong, nonatomic) UIView *passwordView;
+@property (strong, nonatomic) UIView *sendButtonView;
 
 @property (nonatomic,strong)NSDictionary* userDict;
 

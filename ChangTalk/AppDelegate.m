@@ -21,9 +21,9 @@
 
 #define kSlideMenuWidth                200.0f
 
-
 @interface AppDelegate ()
-@property (nonatomic,strong) MMDrawerController * drawerController;
+@property (nonatomic, strong) MMDrawerController * drawerController;
+@property (nonatomic, strong) CSNavigationController* commonNavigationController;
 @end
 
 @implementation AppDelegate
@@ -36,12 +36,12 @@
     
     //UIViewController *rightSideDrawerViewController = [[RightSideDrawerViewController alloc] init];
     
-    UINavigationController *navigationController = [[CSNavigationController alloc] initWithRootViewController:centerViewController];
+    _commonNavigationController = [[CSNavigationController alloc] initWithRootViewController:centerViewController];
     
-    if ([navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)])
-        [navigationController.navigationBar setBarTintColor:[UIColor greenColor]];
+//    if ([_commonNavigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)])
+//        [_commonNavigationController.navigationBar setBarTintColor:[UIColor greenColor]];
     
-    [navigationController setRestorationIdentifier:@"CSNavigationControllerRestorationKey"];
+    [_commonNavigationController setRestorationIdentifier:@"CSNavigationControllerRestorationKey"];
     
     if(OSVersionIsAtLeastiOS7){
 
@@ -49,14 +49,14 @@
 		//[leftSideNavController setRestorationIdentifier:@"CSLeftControllerRestorationKey"];
         
         self.drawerController = [[MMDrawerController alloc]
-                                 initWithCenterViewController:navigationController
+                                 initWithCenterViewController:_commonNavigationController
                                  leftDrawerViewController:leftSideViewController
                                  rightDrawerViewController:nil];
         [self.drawerController setShowsShadow:NO];
     }
     else{
         self.drawerController = [[MMDrawerController alloc]
-                                 initWithCenterViewController:navigationController
+                                 initWithCenterViewController:_commonNavigationController
                                  leftDrawerViewController:leftSideViewController
                                  rightDrawerViewController:nil];
     }

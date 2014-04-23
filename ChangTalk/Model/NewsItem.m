@@ -8,9 +8,6 @@
 
 #import "NewsItem.h"
 
-#define kAPI_NEWSPIC(site) [NSString stringWithFormat:@"http://photoshow.tc108.org:814%@",site]
-
-
 @implementation NewsItem
 
 - (id)initWithParameters:(int)nID
@@ -38,7 +35,7 @@
     NSArray *array = [imageField componentsSeparatedByString:@"|"];
     NSArray *result = [array [0] componentsSeparatedByString:@","];
     
-    return kAPI_NEWSPIC(result[1]);
+    return kAPI_GetInfoPic(result[1]);
     
 //    //regexTest
 //    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\d+,([^,|]+),\\d+" options:NSRegularExpressionCaseInsensitive error:nil];

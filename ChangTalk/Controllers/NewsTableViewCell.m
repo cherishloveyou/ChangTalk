@@ -21,7 +21,7 @@
         [self.contentView addSubview:_newsImageView];
         
         _newsTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 2, 200, 48)];
-        _newsTitleLabel.font = [UIFont systemFontOfSize:14];
+        _newsTitleLabel.font = [UIFont boldSystemFontOfSize:14];
         _newsTitleLabel.textColor = [UIColor blackColor];
         _newsTitleLabel.numberOfLines = 2;
         [self.contentView addSubview:_newsTitleLabel];
@@ -45,6 +45,9 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    if (selected) {
+        _newsTitleLabel.textColor = [UIColor grayColor];
+    }
 }
 
 - (void)startDownloadNewsImage
@@ -59,7 +62,6 @@
 
 - (void)configNewsCellWithContent:(NewsItem*)item
 {
-
     _newsTitleLabel.text = item.newsTitle;
     _newsCommentNum.text = [NSString stringWithFormat:@"%d评论",item.commentCount];
     //图片

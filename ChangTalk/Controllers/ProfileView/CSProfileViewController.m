@@ -8,6 +8,11 @@
 
 #import "CSProfileViewController.h"
 #import "CSHeadCoverView.h"
+#import "AFNetworking.h"
+#import "CSNewsDetailViewController.h"
+
+#define kAPI_GetUserMsgList(uid) [NSString stringWithFormat:@"http://mtalksvc.tc108.org:831/API/ATalk/GetInfoList?userID=%d&forumsCode=&keyword=&siteID=0&removeForwardingInfo=0&isContainUserName=0&orderBy=0&pageIndex=1&pageSize=1",uid]
+
 
 @interface CSProfileViewController ()
 @property (nonatomic, strong) CSHeadCoverView *coverView;
@@ -32,14 +37,19 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    
     _coverView = [[CSHeadCoverView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 180)];
     [_coverView setBackgroundImage:[UIImage imageNamed:@"profile.jpg"]];
 
-        self.tableView.tableHeaderView = self.coverView;
+    self.tableView.tableHeaderView = self.coverView;
+    
+    //
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:kAPI_GetUserMsgList(16243) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        debugLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        debugLog(@"Error: %@", error);
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,14 +102,12 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    CSNewsDetailViewController *detailController = [[CSNewsDetailViewController alloc] init];
+    detailController.newsid = 100;
+    [self.navigationController pushViewController:detailController animated:YES];
 }
-*/
 
 /*
 // Override to support editing the table view.

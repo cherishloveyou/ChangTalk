@@ -25,13 +25,27 @@
 
 - (void)setTotalPagesCount:(NSInteger (^)(void))totalPagesCount
 {
-    _totalPageCount = totalPagesCount();
-    if (_totalPageCount > 0) {
+    self.totalPageCount = totalPagesCount();
+    if (self.totalPageCount > 0) {
+        if (self.totalPageCount > 1) {
+            self.scrollView.scrollEnabled = YES;
+            self.scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.scrollView.frame), 0);
+            [self.animationTimer resumeTimerAfterTimeInterval:self.animationDuration];
+        } else {
+            self.scrollView.scrollEnabled = NO;
+        }
+        self.pageControl.numberOfPages = _totalPageCount;
         [self configContentViews];
-        [self.animationTimer resumeTimerAfterTimeInterval:self.animationDuration];
-        _pageControl.numberOfPages = _totalPageCount;
     }
 }
+
+- (void)setFetchContentViewAtIndex:(UIView *(^)(NSInteger index))fetchContentViewAtIndex
+{
+    _fetchContentViewAtIndex = fetchContentViewAtIndex;
+    //加入第一页
+    [self configContentViews];
+}
+
 
 - (id)initWithFrame:(CGRect)frame animationDuration:(NSTimeInterval)animationDuration
 {
@@ -58,22 +72,21 @@
         self.scrollView.contentMode = UIViewContentModeCenter;
         self.scrollView.contentSize = CGSizeMake(3 * CGRectGetWidth(self.scrollView.frame), CGRectGetHeight(self.scrollView.frame));
         self.scrollView.delegate = self;
-        self.scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.scrollView.frame), 0);
+        //self.scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.scrollView.frame), 0);
         self.scrollView.pagingEnabled = YES;
         [self addSubview:self.scrollView];
         self.currentPageIndex = 0;
         
-        _pageControl = [[UIPageControl alloc]initWithFrame: CGRectMake(self.frame.size.width-80, self.frame.size.height-20, 60, 20)];
-        [_pageControl setBackgroundColor:[UIColor clearColor]];
-        [_pageControl setUserInteractionEnabled:NO];
-        [_pageControl setPageIndicatorTintColor:[UIColor whiteColor]];
-        [_pageControl setCurrentPageIndicatorTintColor:[UIColor greenColor]];
+        self.pageControl = [[UIPageControl alloc]initWithFrame: CGRectMake(self.frame.size.width-80, self.frame.size.height-20, 60, 20)];
+        self.pageControl.backgroundColor = [UIColor clearColor];
+        self.pageControl.userInteractionEnabled = NO;
+        self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+        self.pageControl.currentPageIndicatorTintColor = [UIColor greenColor];
         [self addSubview:_pageControl];
     }
     return self;
 }
 
-#pragma mark -
 #pragma mark - 私有函数
 
 - (void)configContentViews
@@ -84,6 +97,9 @@
     NSInteger counter = 0;
     for (UIView *contentView in self.contentViews) {
         contentView.userInteractionEnabled = YES;
+        UILongPressGestureRecognizer *longTapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longTapGestureAction:)];
+        [contentView addGestureRecognizer:longTapGesture];
+        
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(contentViewTapAction:)];
         [contentView addGestureRecognizer:tapGesture];
         CGRect rightRect = contentView.frame;
@@ -92,7 +108,9 @@
         contentView.frame = rightRect;
         [self.scrollView addSubview:contentView];
     }
-    [_scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0)];
+    if (self.totalPageCount > 1) {
+        [_scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0)];
+    }
 }
 
 /**
@@ -108,9 +126,22 @@
     [self.contentViews removeAllObjects];
     
     if (self.fetchContentViewAtIndex) {
-        [self.contentViews addObject:self.fetchContentViewAtIndex(previousPageIndex)];
-        [self.contentViews addObject:self.fetchContentViewAtIndex(_currentPageIndex)];
-        [self.contentViews addObject:self.fetchContentViewAtIndex(rearPageIndex)];
+        id set = (self.totalPageCount == 1)?[NSSet setWithObjects:@(previousPageIndex),@(_currentPageIndex),@(rearPageIndex), nil]:@[@(previousPageIndex),@(_currentPageIndex),@(rearPageIndex)];
+        for (NSNumber *tempNumber in set) {
+            NSInteger tempIndex = [tempNumber integerValue];
+            if ([self isValidArrayIndex:tempIndex]) {
+                [self.contentViews addObject:self.fetchContentViewAtIndex(tempIndex)];
+            }
+        }
+    }
+}
+
+- (BOOL)isValidArrayIndex:(NSInteger)index
+{
+    if (index >= 0 && index <= self.totalPageCount - 1) {
+        return YES;
+    } else {
+        return NO;
     }
 }
 
@@ -125,7 +156,6 @@
     }
 }
 
-#pragma mark -
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -143,13 +173,13 @@
     int contentOffsetX = scrollView.contentOffset.x;
     if(contentOffsetX >= (2 * CGRectGetWidth(scrollView.frame))) {
         self.currentPageIndex = [self getValidNextPageIndexWithPageIndex:self.currentPageIndex + 1];
-        NSLog(@"next，当前页:%d",self.currentPageIndex);
+        //NSLog(@"next，当前页:%d",self.currentPageIndex);
         _pageControl.currentPage = self.currentPageIndex;
         [self configContentViews];
     }
     if(contentOffsetX <= 0) {
         self.currentPageIndex = [self getValidNextPageIndexWithPageIndex:self.currentPageIndex - 1];
-        NSLog(@"previous，当前页:%d",self.currentPageIndex);
+        //NSLog(@"previous，当前页:%d",self.currentPageIndex);
         _pageControl.currentPage = self.currentPageIndex;
         [self configContentViews];
     }
@@ -163,6 +193,18 @@
 #pragma mark -
 #pragma mark - 响应事件
 
+- (void)longTapGestureAction:(UILongPressGestureRecognizer *)tapGesture
+{
+    if (tapGesture.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"UIGestureRecognizerStateBegan");
+        [self.animationTimer pauseTimer];
+    }
+    if (tapGesture.state == UIGestureRecognizerStateEnded) {
+        [self.animationTimer resumeTimer];
+        NSLog(@"UIGestureRecognizerStateEnded");
+    }
+}
+
 - (void)animationTimerDidFired:(NSTimer *)timer
 {
     CGPoint newOffset = CGPointMake(self.scrollView.contentOffset.x + CGRectGetWidth(self.scrollView.frame), self.scrollView.contentOffset.y);
@@ -175,14 +217,5 @@
         self.TapActionBlock(self.currentPageIndex);
     }
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

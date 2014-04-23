@@ -10,4 +10,6 @@
 
 @interface CSNewsDetailViewController : UIViewController
 
+@property (nonatomic,assign)NSInteger newsid;
+
 @end
