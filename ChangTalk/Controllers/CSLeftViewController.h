@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CSLeftViewController : UITableViewController
+@interface CSLeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, strong)UITableView* tableView;
 
 @end

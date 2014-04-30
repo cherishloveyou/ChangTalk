@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CSPublishViewController : UIViewController
+@interface CSPublishViewController : UIViewController<UITextViewDelegate>
 
 @end

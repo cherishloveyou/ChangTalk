@@ -8,6 +8,7 @@
 
 #import "CSNewsViewController.h"
 #import "CSNavigationController.h"
+#import "UIViewController+MMDrawerController.h"
 #import "NewsTableViewCell.h"
 #import "CycleScrollView.h"
 #import "UIImageView+WebCache.h"
@@ -139,6 +140,7 @@
     pageIndex = 1;
     [_newsData removeAllObjects];
 }
+
 - (void)refreshNewsData
 {
     if (1) {
@@ -155,13 +157,13 @@
         if (_isloadOver) {
             return;
         }
+        //如果是刷新数据，那么久清空数据集
+        if(!noRefresh){
+            [self clearData];
+        }
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager GET:kAPI_NEWS(pageIndex,0) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //debugLog(@"NewsJSON: %@", responseObject);
-            //如果是刷新数据，那么久清空数据集
-            if(!noRefresh){
-                [self clearData];
-            }
             @try {
                 NSArray *array = [responseObject objectForKey:@"InfoList"];
                 if (array) {
@@ -376,6 +378,8 @@
     CSNavigationController *nav = (CSNavigationController*)parentController.centerViewController;
     
     [nav pushViewController:detailController animated:YES];
+    
+    //[parentController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
 }
 
 @end

@@ -34,26 +34,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+        self.modalPresentationCapturesStatusBarAppearance = NO;
+    }
    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(clickDimissView:)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(clickPostNewTweet:)];
     
+    [self.navigationController  setToolbarHidden:NO animated:YES];
+    
     //_editorButtons = [[NSMutableArray alloc] initWithCapacity:6];
     
-    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 480)];
-    _scrollView.backgroundColor = [UIColor blueColor];
+    //_scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 480)];
+    //_scrollView.backgroundColor = [UIColor blueColor];
     //[self.view addSubview:_scrollView];
     
-    debugLog(@"widht%f= height=%f", CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
-    _accessoryView = [[CSInputAccessoryView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame)-44, 320, 44)];
+    debugLog(@"width=%f&height=%f", CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    _accessoryView = [[CSInputAccessoryView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame)-OSNavigationAdapterHeight-44, 320, 44)];
     _accessoryView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:_accessoryView];
     
-    _textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 80, 320, 100)];
+    _textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 100)];
     _textView.backgroundColor = [UIColor redColor];
     _textView.font = [UIFont systemFontOfSize:16.0f];
-    _textView.returnKeyType = UIReturnKeySend;
+    _textView.keyboardType = UIKeyboardTypeDefault;
+    _textView.textColor = [UIColor lightGrayColor];
+    _textView.text = @"分享新鲜事 ...";
+    _textView.delegate = self;
+    
+    //_textView.returnKeyType = UIReturnKeySend;
     //_textView.inputAccessoryView = _accessoryView;
     
     
@@ -165,14 +178,49 @@
     }else if(sender.tag == 11){ //相机
         //[self clickCameraButton];
     }else if(sender.tag == 12){ //话题
-        //[self clickTopicButton];
+        [self clickTopicButton];
     }else if(sender.tag == 13){ //@用户
-        //[self clickUserButton];
+        [self clickAtUserButton];
     }else if(sender.tag == 14){ //表情
         [self clickEmoticonButton];
     }else if(sender.tag == 15){ //键盘
         [self clickKeyboardButton];
     }
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    //[self _layoutRightItem];
+    self.textView.text = @"";
+    _textView.textColor = [UIColor blackColor];
+    return YES;
+}
+
+- (void)textViewDidChangeSelection:(UITextView *)textView
+{
+
+}
+
+- (void)clickAtUserButton
+{
+    NSMutableString* textString = [[NSMutableString alloc]initWithString:self.textView.text];
+    [textString appendString:@"@"];
+    self.textView.text = textString;
+}
+
+- (void)clickTopicButton
+{
+
+    int Len = self.textView.selectedRange.location;
+    
+    NSMutableString* textString = [[NSMutableString alloc]initWithString:self.textView.text];
+    [textString appendString:@"##"];
+    self.textView.text = textString;
+
+    NSRange range;
+    range.location = Len+1;
+    range.length = 0;
+    self.textView.selectedRange = range;
 }
 
 - (void)clickEmoticonButton
@@ -241,6 +289,21 @@
     self.scrollView.frame = containerFrame;
     
     self.scrollView.scrollEnabled = YES;
+    
+    
+    NSValue *animationDurationValue = [[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    // Need to translate the bounds to account for rotation.
+	// get a rect for the textView frame
+	CGRect accessoryFrame = _accessoryView.frame;
+    accessoryFrame.origin.y = self.view.bounds.size.height - (keyboardBounds.size.height + accessoryFrame.size.height);
+    
+    [UIView animateWithDuration:animationDuration
+                     animations:^{
+                         _accessoryView.frame = accessoryFrame;
+                     }];
+
 }
 
 - (void)keyboardWillChangeFrame:(NSNotification *)notification
@@ -288,6 +351,19 @@
     self.scrollView.frame = containerFrame;
     
     self.scrollView.scrollEnabled = YES;
+    
+    
+    NSValue *animationDurationValue = [[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    
+    CGRect accessoryFrame = _accessoryView.frame;
+    accessoryFrame.origin.y = self.view.bounds.size.height - accessoryFrame.size.height;
+    
+    [UIView animateWithDuration:animationDuration
+                     animations:^{
+                         _accessoryView.frame = accessoryFrame;
+                     }];
 }
 
 - (void)didReceiveMemoryWarning

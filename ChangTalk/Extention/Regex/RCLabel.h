@@ -86,7 +86,7 @@ typedef enum
     CFMutableAttributedStringRef _attrString;
     RCLabelComponent * _currentLinkComponent;
     RCLabelComponent * _currentImgComponent;
-    RCLabelComponentsStructure *componentsAndPlainText_;
+    RCLabelComponentsStructure *_componentsAndPlainText;
 }
 
 
@@ -129,7 +129,7 @@ typedef enum
 	int _position;
 	int _componentIndex;
     BOOL _isClosure;
-    UIImage *img_;    
+    UIImage *_img;
 }
 
 @property (nonatomic, assign) int componentIndex;
@@ -151,10 +151,10 @@ typedef enum
 
 
 @interface RCLabelComponentsStructure :NSObject {
-    NSArray *components_;
-    NSString *plainTextData_;
-    NSArray *linkComponents_;
-    NSArray *imgComponents_;
+    NSArray* _components;
+    NSString* _plainTextData;
+    NSArray* _linkComponents;
+    NSArray* _imgComponents;
 }
 @property(nonatomic, retain) NSArray *components;
 @property(nonatomic, retain) NSArray *linkComponents;

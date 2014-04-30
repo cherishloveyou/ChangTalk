@@ -7,6 +7,7 @@
 //
 
 #import "CSHomeViewController.h"
+#import "MMDrawerBarButtonItem.h"
 #import "CSPublishViewController.h"
 
 @interface CSHomeViewController ()
@@ -37,7 +38,23 @@
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(clickEditView:)];
+    MMDrawerBarButtonItem *button = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(clickMenuView:)];
+    self.navigationItem.leftBarButtonItem  = button;
+    
+//    //开始自定义返回按钮
+//    UIButton* listBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    //listBtn.frame = CGRectMake(0, 0, 44, 44);
+//    [listBtn setBackgroundImage:[UIImage imageNamed:@"icon_menu_list@2x.png"] forState:UIControlStateNormal];
+//    [listBtn addTarget:self action:@selector(clickMenuView:) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:listBtn];
+    
+    UIButton* eidtBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    eidtBtn.frame = CGRectMake(0, 0, 44, 44);
+    [eidtBtn setBackgroundImage:[UIImage imageNamed:@"icon_menu_edit@2x.png"] forState:UIControlStateNormal];
+    [eidtBtn addTarget:self action:@selector(clickEditView:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:eidtBtn];
+    
+
 
     _slideView = [[CSSlideSwitchView alloc]initWithFrame:self.view.bounds];
     
@@ -48,7 +65,6 @@
                                         stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f];
     
     self.vc1 = [[CSNewsViewController alloc]init];
-    //self.vc2 = [[CSListViewController alloc]init];
     self.vc2 = [[CSTweetViewController alloc]init];
     
     [self.view addSubview:self.slideView];
@@ -56,14 +72,25 @@
     [self.slideView buildUI];
 }
 
+- (void)clickMenuView:(id)sender
+{
+    
+}
+
 - (void)clickEditView:(id)sender
 {
     CSPublishViewController* postController = [[CSPublishViewController alloc]init];
     CSNavigationController* nav = [[CSNavigationController alloc]initWithRootViewController:postController];
     //[self.navigationController pushViewController:postController animated:YES];
-    [self presentViewController:nav animated:YES completion:^{
+//    CSNavigationController* nav = [[CSNavigationController alloc]initWithRootViewController:[[CSPublishViewController alloc]init]];
+    //postController.navigationController.navigationBar.hidden = YES;
+    
+    [self.view.window.rootViewController presentViewController:nav animated:YES completion:^{
         debugLog(@"edit tweet view!");
     }];
+//    [self presentViewController:nav animated:YES completion:^{
+//        debugLog(@"edit tweet view!");
+//    }];
 }
 
 #pragma mark - 滑动tab视图代理方法

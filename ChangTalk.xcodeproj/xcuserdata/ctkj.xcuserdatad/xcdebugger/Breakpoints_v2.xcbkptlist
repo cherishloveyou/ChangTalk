@@ -69,13 +69,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChangTalk/View/TweetView.m"
-            timestampString = "419837764.851405"
+            filePath = "ChangTalk/Controllers/SlideTopMenu/CSSlideSwitchView.m"
+            timestampString = "419999477.333316"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "-imageScaleUpAction:"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
+            landmarkName = "-scrollHandlePan:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -85,13 +85,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChangTalk/Controllers/SlideTopMenu/CSSlideSwitchView.m"
-            timestampString = "419935622.040089"
+            filePath = "ChangTalk/Extention/Regex/RCLabel.m"
+            timestampString = "420432410.272736"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
-            landmarkName = "-scrollHandlePan:"
+            startingLineNumber = "831"
+            endingLineNumber = "831"
+            landmarkName = "-applyFontAttributes:toText:atPosition:withLength:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChangTalk/Extention/Regex/RCLabel.m"
+            timestampString = "420432410.272736"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "826"
+            endingLineNumber = "826"
+            landmarkName = "-applyFontAttributes:toText:atPosition:withLength:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChangTalk/Extention/Regex/HtmlString.m"
+            timestampString = "420461348.724335"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "+transformString:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

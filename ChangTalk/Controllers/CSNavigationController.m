@@ -56,8 +56,10 @@
     
     if ([self.navigationBar respondsToSelector:@selector(setTranslucent:)]) {
         self.navigationBar.translucent = NO;
-        self.navigationBar.barTintColor = [UIColor greenColor];
-        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont systemFontOfSize:21.0]};
+        if (OSVersionIsAtLeastiOS7) {
+            self.navigationBar.barTintColor = [UIColor colorWithRed:120/255.0f green:180/255.0f blue:0/255.0f alpha:1.0f];
+        }
+        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont systemFontOfSize:18.0]};
         [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
     }
 }

@@ -10,12 +10,13 @@
 #import "UIImageView+WebCache.h"
 #import "HtmlString.h"
 #import "CSProfileViewController.h"
+#import "AppDelegate.h"
 
-#define CELL_INFO_IMG_BTN_TAG 10000
-#define CELL_RES_IMG_BTN_TAG  2000000
-#define TWITTER_FONTSIZE_NAME  15
-
-#define TWITTER_LEFTWIDTH 62
+//#define CELL_INFO_IMG_BTN_TAG 10000
+//#define CELL_RES_IMG_BTN_TAG  2000000
+//#define TWITTER_FONTSIZE_NAME  15
+#define TWITTER_LEFTMARGIN  60
+#define TWITTER_LEFTWIDTH 65
 #define MAX_TEXT_LENGTH 140
 #define TWITTER_FONTSIZE_INFO 15
 #define TWITTER_FONTSIZE_TITLE 16
@@ -53,46 +54,97 @@
 //
 - (void)initCellView
 {
-    self.avatarView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 4, 36, 36)];
-    //self.avatarView.image = [UIImage imageNamed:@"default_avatar@2x.png"];
-    self.avatarView.layer.cornerRadius = 18.0f;
-    self.avatarView.clipsToBounds = YES;
-    self.avatarView.userInteractionEnabled = YES;
+    _avatarView = [[UIImageView alloc]initWithFrame:CGRectMake(12, 12, 40, 40)];
+    _avatarView.layer.cornerRadius = CGRectGetWidth(_avatarView.frame)/2.0f;
+    _avatarView.clipsToBounds = YES;
+    _avatarView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapAvatar = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAvatar:)];
-    [self.avatarView addGestureRecognizer:tapAvatar];
-    [self.contentView addSubview:self.avatarView];
+    [_avatarView addGestureRecognizer:tapAvatar];
+    [self.contentView addSubview:_avatarView];
 
-    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(TWITTER_LEFTWIDTH, 4, 200, 20)];
+    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(TWITTER_LEFTMARGIN, 10, 200, 16)];
     _nameLabel.backgroundColor = [UIColor clearColor];
     _nameLabel.textAlignment = NSTextAlignmentLeft;
-    _nameLabel.font = [UIFont boldSystemFontOfSize:12.0f];
+    _nameLabel.font = [UIFont boldSystemFontOfSize:14.0f];
     [self.contentView  addSubview:_nameLabel];
 
-    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(210, 4, 100, 20)];
+    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(210, 10, 100, 16)];
     _timeLabel.backgroundColor = [UIColor clearColor];
-    _timeLabel.textColor = TWITTER_TEXTCOLOR_TIME;
+    _timeLabel.textColor = [UIColor lightGrayColor];
     _timeLabel.textAlignment = NSTextAlignmentRight;
     _timeLabel.font = [UIFont systemFontOfSize:10.0f];
-    [self  addSubview:_timeLabel];
+    [self.contentView addSubview:_timeLabel];
     
     _tweetView = [[TweetView alloc]initWithFrame:CGRectZero];
     [self.contentView addSubview:_tweetView];
     
+    _sourceLabel = [[UILabel alloc]initWithFrame:CGRectZero];
+    _sourceLabel.font = [UIFont systemFontOfSize:9.0f];
+    _sourceLabel.textColor = [UIColor grayColor];
+    [self.contentView addSubview:_sourceLabel];
+    
+    _likeLabel = [[UILabel alloc]initWithFrame:CGRectZero];
+    _likeLabel.font = [UIFont systemFontOfSize:9.0f];
+    _likeLabel.textColor = [UIColor grayColor];
+    [self.contentView addSubview:_likeLabel];
+    
+    _commentLabel = [[UILabel alloc]initWithFrame:CGRectZero];
+    _commentLabel.font = [UIFont systemFontOfSize:9.0f];
+    _commentLabel.textColor = [UIColor grayColor];
+    [self.contentView addSubview:_commentLabel];
+    
+    [self addBtnWithTitle:@"评论" iconNomal:@"icon_tweet_comment.png" iconHighlightedi:@"icon_tweet_comment_h.png" iconSelect:nil  index:1 addTarget:self action:@selector(clickBtnComment:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addBtnWithTitle:@"赞" iconNomal:@"icon_tweet_like.png" iconHighlightedi:@"icon_tweet_like_h.png" iconSelect:nil  index:2 addTarget:self action:@selector(clickBtnLike:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)tapAvatar:(UIGestureRecognizer*)gestureRecognizer
 {
-    debugLog(@"gesture");
+    debugLog(@"gesture click avatar");
     
-    CSProfileViewController* viewController = [[CSProfileViewController alloc] init];
+    CSProfileViewController* profileController = [[CSProfileViewController alloc] init];
+    profileController.userName = _tweetItem.authorName;
     //viewController.alloc
     //以下通过UIView响应者链获取所在链中的UIViewController
-    [self.viewController.navigationController pushViewController:viewController animated:YES];
+    //UINavigationController* chouti= [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:profileController ];
+    
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    [delegate.commonNavController pushViewController:profileController animated:YES];
+    
+    //[self.viewController.navigationController pushViewController:viewController animated:YES];
 }
 
-//设置内容
-- (void)configTweetCellContent:(NSDictionary*)dict
+- (void)addBtnWithTitle:(NSString *)titlie iconNomal:(NSString *)iconNomal iconHighlightedi:(NSString *)Highlighted iconSelect:(NSString *)select index:(int)index addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)event
 {
+    CGSize  size = self.frame.size;
+    CGFloat btnWidth = size.width / 3;
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:iconNomal] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:select] forState:UIControlStateHighlighted];
+    [btn setImage:[UIImage imageNamed:select] forState:UIControlStateSelected];
+    [btn setTitle:titlie forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    btn.titleLabel.font = [ UIFont systemFontOfSize:10];
+    btn.frame = CGRectMake(index * btnWidth, 0, btnWidth, size.height);
+    // 设置标题的间距
+    btn.titleEdgeInsets = UIEdgeInsetsMake(2, 5, 0, 0);
+    btn.tag = 1000 + index; // 设置tag值
+    [btn addTarget:target action:action forControlEvents:event];
+    [self.contentView addSubview:btn];
+}
+
+- (void)clickBtnLike:(id)sender
+{
+    
+}
+
+- (void)clickBtnComment:(id)sender
+{
+    
 }
 
 - (void)layoutSubviews
@@ -111,16 +163,18 @@
     //获取微博视图的高度
     float h = [TweetView getTweetViewHeight:_tweetItem isRepost:NO];
     
-    _tweetView.frame = CGRectMake(50, _nameLabel.frame.origin.y+_nameLabel.frame.size.height, 320, h);
+    _tweetView.frame = CGRectMake(TWITTER_LEFTMARGIN-4, _nameLabel.frame.origin.y+_nameLabel.frame.size.height+8, 260, h);
     
     //让_tweetView重新布局，5.1版本错乱
     [_tweetView setNeedsLayout];
+    
+    _sourceLabel.frame = CGRectMake(TWITTER_LEFTMARGIN, _tweetView.frame.origin.y + _tweetView.frame.size.height, 100, 20);
+    _sourceLabel.text = _tweetItem.souceType;
+    
 }
-
 
 - (NSString *)intervalSinceNow: (NSTimeInterval)late
 {
-    
 //    NSDateFormatter *date=[[NSDateFormatter alloc] init];
 //    [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 //    NSDate *d=[date dateFromString:theDate];

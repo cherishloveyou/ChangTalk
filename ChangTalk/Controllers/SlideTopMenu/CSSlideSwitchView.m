@@ -30,8 +30,14 @@ static const NSUInteger kTagOfRightSideButton = 999;
     [self addSubview:_topScrollView];
     _userSelectedChannelID = 100;
     
+    
+//    CGFloat navigationAdapterHeight = 44.0f;
+//    if (OSVersionIsAtLeastiOS7) {
+//        navigationAdapterHeight = 64.0f;
+//    }
+
     //创建主滚动视图
-    _rootScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kHeightOfTopScrollView, self.bounds.size.width, self.bounds.size.height - kHeightOfTopScrollView -64)];
+    _rootScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kHeightOfTopScrollView, self.bounds.size.width, self.bounds.size.height - kHeightOfTopScrollView - OSNavigationAdapterHeight)];
     _rootScrollView.delegate = self;
     _rootScrollView.pagingEnabled = YES;
     _rootScrollView.userInteractionEnabled = YES;

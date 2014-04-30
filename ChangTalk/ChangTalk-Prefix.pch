@@ -31,31 +31,35 @@
 
 #define OSVersionIsAtLeastiOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
+#define OSNavigationAdapterHeight (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)?64:44)
 
 
 #if 1
-
+//获取用户信息
+#define kAPI_GetUserProfile(username) [NSString stringWithFormat:@"http://sx.tc108.org:920/API/AppUserInfo?userName=%@",username]
+//
+#define kAPI_GetUserMessage(uid,index,size) [NSString stringWithFormat:@"http://mtalksvc.tc108.org:831/API/ATalk/GetInfoList?userID=%d&forumsCode=&keyword=&siteID=0&removeForwardingInfo=0&isContainUserName=0&orderBy=1&pageIndex=%d&pageSize=%d",uid,index,size]
+//网页渲染
 #define kAPI_MOBILE  @"http://shuo.tc108.org:821/front/MobileDetail"
-
+//幻灯片
 #define kAPI_SLIDE(siteid) [NSString stringWithFormat:@"http://mtalksvc.tc108.org:831/api/AHome/GetRecommendInfo?siteID=%d",siteid]
-
+//新闻
 #define kAPI_NEWS(index,size) [NSString stringWithFormat:@"http://mtalksvc.tc108.org:831/API/ATalk/GetInfoRecommendList?siteID=2&pageIndex=%d&pageSize=%d",index,size]
-
 //聚合消息 大家在聊
-#define kAPI_GetAggregatedMessage(siteID,size) [NSString stringWithFormat:@"http://mtalksvc.tc108.org:831/API/ATalk/GetInfoList?userID=-99&forumsCode=&keyword=&siteID=%d&removeForwardingInfo=0&isContainUserName=0&orderBy=1&pageIndex=1&pageSize=%d",siteID,size]
-
+#define kAPI_GetAggregatedMessage(siteid,index,size) [NSString stringWithFormat:@"http://mtalksvc.tc108.org:831/API/ATalk/GetInfoList?userID=-99&forumsCode=&keyword=&siteID=%d&removeForwardingInfo=0&isContainUserName=0&orderBy=1&pageIndex=%d&pageSize=%d",siteid,index,size]
 //用户头像 根据用户ID
 #define kAPI_GetUserHeadPic(uid) [NSString stringWithFormat:@"http://www.tc108.org:920/info/getheadpic?id=%d",uid]
 //获取正文的信息
 #define kAPI_GetInfoPic(site) [NSString stringWithFormat:@"http://photoshow.tc108.org:814%@",site]
-
+//
 #define kAPI_INFO(id) [NSString stringWithFormat:@"http://mtalksvc.tc108.org:831/API/ATalk/GetInfoRefStateByID?infoID=%d",id]
 //获取我的评论
 #define kAPI_GetMyComment(index,size) [NSString stringWithFormat:@"http://discuss1.tc108.org:1202/API/AComment/MyCommentList?infoType=2031&pageIndex=%d&pageSize=%d",index,size]
-
+//获取信息评论
 #define kAPI_GetInfoComment(id,index,size) [NSString stringWithFormat:@"http://discuss1.tc108.org:1202/API/AComment/CommentList?infoID=%d&infoType=2031&pageIndex=%d&pageSize=%d",id,index,size]
 
 #else
+
 #define kAPI_GetUserHeadPic(uid) [NSString stringWithFormat:@"http://www.108sq.com/info/getheadpic?id=%d",uid]
 
 #endif

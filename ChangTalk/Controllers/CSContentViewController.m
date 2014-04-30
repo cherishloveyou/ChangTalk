@@ -12,7 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "CommentTableViewCell.h"
 #import "RDRStickyKeyboardView.h"
-#import "CSFullScreenPhotoBrowseView.h"
+#import "PhotoBrowseView.h"
 #import "AFNetworking.h"
 
 
@@ -223,7 +223,7 @@
     NSLog(@"image url=%@", urlToSave);
     if (urlToSave.length > 0) {
         //[self showImageURL:urlToSave point:pt];
-        //CSFullScreenPhotoBrowseView * browse = [[CSFullScreenPhotoBrowseView alloc]initWithUrlPath:<#(NSString *)#> thumbnail:nil fromRect:<#(CGRect)#>];
+        //PhotoBrowseView * browse = [[PhotoBrowseView alloc]initWithUrlPath:<#(NSString *)#> thumbnail:nil fromRect:<#(CGRect)#>];
         
     }
 }
@@ -337,7 +337,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"CommentListCell";
+    static NSString *cellIdentifier = @"infoCommentListCell";
     
     CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     

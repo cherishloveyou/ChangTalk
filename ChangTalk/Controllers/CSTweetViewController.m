@@ -103,7 +103,7 @@
             return;
         }
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager GET:kAPI_GetAggregatedMessage(2,30) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager GET:kAPI_GetAggregatedMessage(2,1,30) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             debugLog(@"TweetJSON: %@", responseObject);
             //如果是刷新数据，那么久清空数据集
             if(!noRefresh){
@@ -281,7 +281,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_msgData count] -1;
+    return [_msgData count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -289,15 +289,16 @@
     TweetItem *weibo = [self.msgData objectAtIndex:indexPath.row];
     float height = [TweetView getTweetViewHeight:weibo isRepost:NO];
     
-    height += 60;
+    height += 58;
     
     return height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellIdentifier = [NSString stringWithFormat:@"TweetCellIdentifier%d,%d",indexPath.section,indexPath.row];
-
+    //NSString* cellIdentifier = [NSString stringWithFormat:@"TweetCellIdentifier%d,%d",indexPath.section,indexPath.row];
+    static NSString* cellIdentifier = @"TweetCellIdentifier";
+    
     TweetTableViewCell *cell = (TweetTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
         cell = [[TweetTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];

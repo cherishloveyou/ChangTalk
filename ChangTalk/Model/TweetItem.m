@@ -28,7 +28,7 @@
         
         if (![[dictionary objectForKey:@"ForwardingSource"] isEqual:[NSNull null]]) {
             TweetItem *retweetedItem = [[TweetItem alloc] initWithDictionary:[dictionary objectForKey:@"ForwardingSource"]];
-            [retweetedItem setValue:@"标题" forKey:@"tweetTitle"];
+            //[retweetedItem setValue:@"标题" forKey:@"tweetTitle"];
             self.reTweetItem = retweetedItem;
         }
     }

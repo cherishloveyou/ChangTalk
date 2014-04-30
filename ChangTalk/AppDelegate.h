@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMDrawerController.h"
+#import "CSNavigationController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (nonatomic, strong) MMDrawerController * drawerController;
+@property (nonatomic, strong) CSNavigationController* commonNavController;
 
 @end

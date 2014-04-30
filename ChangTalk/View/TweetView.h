@@ -12,12 +12,11 @@
 
 @interface TweetView : UIView<RCLabelDelegate,UIGestureRecognizerDelegate>
 {
-    RCLabel* _tweetTextView;
-    UIImageView* _tweetImageView;
+    RCLabel* _tweetLabel;
+    UIImageView* _tweetThumb;
     TweetView* _retweetedView;       //转发的微博视图
-    UIImageView* _repostBackView;     //转发背景图片
-    
-    NSMutableString * _parseText;   //转换成链接的文本
+    UIImageView* _repostBackView;    //转发背景图
+    NSMutableString * _parseText;    //转换成链接的文本
 }
 
 @property (nonatomic, assign) BOOL isRetweeted;

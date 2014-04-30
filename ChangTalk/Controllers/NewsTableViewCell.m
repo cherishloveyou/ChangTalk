@@ -18,7 +18,7 @@
         // Initialization code
         _newsImageView = [[UIImageView alloc]initWithFrame:CGRectMake(4, 4, 72, 54)];
         _newsImageView.backgroundColor = [UIColor redColor];
-        [self.contentView addSubview:_newsImageView];
+        [self.contentView addSubview: _newsImageView];
         
         _newsTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 2, 200, 48)];
         _newsTitleLabel.font = [UIFont boldSystemFontOfSize:14];

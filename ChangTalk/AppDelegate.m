@@ -8,55 +8,67 @@
 
 #import "AppDelegate.h"
 
-#import "MMDrawerController.h"
 #import "MMDrawerVisualState.h"
 #import "CSDrawerVisualStateManager.h"
-
 #import "CSHomeViewController.h"
 #import "CSLeftViewController.h"
 #import "CSNavigationController.h"
-
+#import "NTSlidingViewController.h"
+#import "CSNewsViewController.h"
+#import "CSTweetViewController.h"
+#import "CSIntrosViewController.h"
+#import "CSLoginViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 
-#define kSlideMenuWidth                200.0f
+#define kSlideMenuWidth                240.0f
 
 @interface AppDelegate ()
-@property (nonatomic, strong) MMDrawerController * drawerController;
-@property (nonatomic, strong) CSNavigationController* commonNavigationController;
+
 @end
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (void)startChangShuo
 {
+    // Override point for customization after application launch.
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [UIApplication sharedApplication].statusBarHidden = NO;
+
+    
     UIViewController *leftSideViewController = [[CSLeftViewController alloc] init];
     
-    UIViewController *centerViewController = [[CSHomeViewController alloc] init];
+    UIViewController *homeViewController = [[CSHomeViewController alloc] init];
     
     //UIViewController *rightSideDrawerViewController = [[RightSideDrawerViewController alloc] init];
     
-    _commonNavigationController = [[CSNavigationController alloc] initWithRootViewController:centerViewController];
+    _commonNavController = [[CSNavigationController alloc] initWithRootViewController:homeViewController];
     
-//    if ([_commonNavigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)])
-//        [_commonNavigationController.navigationBar setBarTintColor:[UIColor greenColor]];
+    [_commonNavController setRestorationIdentifier:@"CSNavigationControllerRestorationKey"];
     
-    [_commonNavigationController setRestorationIdentifier:@"CSNavigationControllerRestorationKey"];
+//    CSNewsViewController* newsController = [[CSNewsViewController alloc]init];
+//    CSTweetViewController* tweetController = [[CSTweetViewController alloc]init];
+//
+//    NTSlidingViewController *sliding = [[NTSlidingViewController alloc] initSlidingViewControllerWithTitle:@"今日有料" viewController:newsController];
+//
+//    [sliding addControllerWithTitle:@"大家在聊" viewController:tweetController];
+//
+//    NTSlidingViewController *sliding = [[NTSlidingViewController alloc] initSlidingViewControllerWithTitlesAndControllers:[NSDictionary dictionaryWithObjectsAndKeys:newsController,@"Test1",tweetController,@"Test2", nil]];
+//    sliding.selectedLabelColor = [UIColor redColor];
+//    sliding.unselectedLabelColor = [UIColor brownColor];
     
     if(OSVersionIsAtLeastiOS7){
-
         //UINavigationController *leftSideNavController = [[CSNavigationController alloc] initWithRootViewController:leftSideViewController];
 		//[leftSideNavController setRestorationIdentifier:@"CSLeftControllerRestorationKey"];
         
         self.drawerController = [[MMDrawerController alloc]
-                                 initWithCenterViewController:_commonNavigationController
+                                 initWithCenterViewController:_commonNavController
                                  leftDrawerViewController:leftSideViewController
                                  rightDrawerViewController:nil];
         [self.drawerController setShowsShadow:NO];
-    }
-    else{
+    }else{
         self.drawerController = [[MMDrawerController alloc]
-                                 initWithCenterViewController:_commonNavigationController
+                                 initWithCenterViewController:_commonNavController
                                  leftDrawerViewController:leftSideViewController
                                  rightDrawerViewController:nil];
     }
@@ -76,8 +88,7 @@
              block(drawerController, drawerSide, percentVisible);
          }
      }];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
     if(OSVersionIsAtLeastiOS7){
         UIColor * tintColor = [UIColor colorWithRed:29.0/255.0
                                               green:173.0/255.0
@@ -85,16 +96,40 @@
                                               alpha:1.0];
         [self.window setTintColor:tintColor];
     }
-    [self.window setRootViewController:self.drawerController];
-    
-    return YES;
+    //
+    self.window.rootViewController = self.drawerController;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    [application setStatusBarStyle:UIStatusBarStyleLightContent];//
-    [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    //判断是否是第一次使用
+    NSString* key = (NSString *)kCFBundleVersionKey;
+    NSString* lastVersion = [[NSUserDefaults standardUserDefaults] stringForKey:key];
+    NSString* currentVersion= [NSBundle mainBundle].infoDictionary[key];
+    
+    if ([lastVersion isEqualToString:currentVersion]) {
+        
+        [self startChangShuo];
+        
+    }else{
+        // 保存当前版本号
+        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:key];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+//        // 新特征界面介绍
+//        CSIntrosViewController* introsVC =[[CSIntrosViewController alloc] init];
+//        introsVC.startBlock = ^(){
+//            [self startChangShuo];
+//        };
+//        self.window.backgroundColor = [UIColor whiteColor];
+//        [self.window makeKeyAndVisible];
+//        self.window.rootViewController = introsVC;
+        CSLoginViewController* loginVC = [[CSLoginViewController alloc]init];
+        self.window.rootViewController = loginVC;
+    }
+
     return YES;
 }
 							

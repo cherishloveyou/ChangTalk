@@ -28,8 +28,8 @@
         
         for (NSString *key in iconKeys) {
             WUEmoticonsKeyboardKeyItem *keyItem = [[WUEmoticonsKeyboardKeyItem alloc] init];
-            keyItem.image = [UIImage imageNamed:iconKeys[key]];
-            keyItem.textToInput = key;
+            keyItem.image = [UIImage imageNamed:key];
+            keyItem.textToInput = iconKeys[key];
             [iconKeyItems addObject:keyItem];
         }
 //        
@@ -41,11 +41,11 @@
 //        applaudKey.image = [UIImage imageNamed:@"applaud"];
 //        applaudKey.textToInput = @"[applaud]";
 //        
-        WUEmoticonsKeyboardKeyItem *weicoKey = [[WUEmoticonsKeyboardKeyItem alloc] init];
-        weicoKey.image = [UIImage imageNamed:@"weico@2x.png"];
-        weicoKey.textToInput = @"[weico]";
-        [iconKeyItems addObject:weicoKey];
-        
+//        WUEmoticonsKeyboardKeyItem *weicoKey = [[WUEmoticonsKeyboardKeyItem alloc] init];
+//        weicoKey.image = [UIImage imageNamed:@"weico@2x.png"];
+//        weicoKey.textToInput = @"[weico]";
+//        [iconKeyItems addObject:weicoKey];
+//        
         //Icon key group
         WUEmoticonsKeyboardKeyItemGroup *imageIconsGroup = [[WUEmoticonsKeyboardKeyItemGroup alloc] init];
         imageIconsGroup.keyItems = iconKeyItems;//@[loveKey,applaudKey,weicoKey];

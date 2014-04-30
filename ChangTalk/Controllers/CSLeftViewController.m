@@ -7,11 +7,13 @@
 //
 
 #import "CSLeftViewController.h"
+#import "MenuCategoryCell.h"
 #import "UIViewController+MMDrawerController.h"
 #import "CSNavigationController.h"
 #import "CSLoginViewController.h"
 #import "CSListViewController.h"
 #import "CSNewsViewController.h"
+#import "CSTweetViewController.h"
 #import "CSProfileViewController.h"
 #import "CSSettingViewController.h"
 #import "CSContentViewController.h"
@@ -31,8 +33,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.view.backgroundColor = [UIColor grayColor];
-        //self.view
     }
     return self;
 }
@@ -41,46 +41,51 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.tableView.separatorColor = [UIColor colorWithRed:150/255.0f green:161/255.0f blue:177/255.0f alpha:1.0f];
     
+    //self.view.backgroundColor = [UIColor colorWithRed:61/255.0f green:61/255.0f blue:61/255.0f alpha:1.0f];
+    //self.view
+    
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.opaque = NO;
-    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundColor = [UIColor colorWithRed:61/255.0f green:61/255.0f blue:61/255.0f alpha:1.0f];
+    self.tableView.separatorColor = [UIColor colorWithRed:150/255.0f green:161/255.0f blue:177/255.0f alpha:1.0f];
+    [self.view addSubview:self.tableView];
+    
+    NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom];
+    
     self.tableView.tableHeaderView = ({
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 80, 80)];
-        imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 110.0f)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(16, 34, 64, 64)];
+        //imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         imageView.image = [UIImage imageNamed:@"userHead.jpg"];
-        imageView.backgroundColor = [UIColor redColor];
+        //imageView.backgroundColor = [UIColor redColor];
         imageView.layer.masksToBounds = YES;
-        imageView.layer.cornerRadius = 40.0f;
-        imageView.layer.borderWidth = 3.0f;
+        imageView.layer.cornerRadius = 32.0f;
+        imageView.layer.borderWidth = 1.0f;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
         imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         imageView.layer.shouldRasterize = YES;
         imageView.clipsToBounds = YES;
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 130, 0, 24)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(90, 60, 120, 20)];
         label.text = @"登陆/注册";
         //label.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
-        label.backgroundColor = [UIColor clearColor];
+        label.backgroundColor = [UIColor redColor];
         label.font = [UIFont systemFontOfSize:12.0f];
         label.textColor = [UIColor whiteColor];
         //label.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
-        [label sizeToFit];
-        label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        //[label sizeToFit];
+        //label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         
         [view addSubview:imageView];
         [view addSubview:label];
         view;
     });
 }
-
-//- (UIStatusBarStyle)preferredStatusBarStyle
-//{
-//    return UIStatusBarStyleLightContent;
-//}
 
 #pragma mark - UITableView Delegate
 
@@ -101,9 +106,9 @@
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 0, 0)];
     label.text = @"App setting";
-    label.font = [UIFont systemFontOfSize:15];
+    label.font = [UIFont systemFontOfSize:16];
     label.textColor = [UIColor whiteColor];
-    label.backgroundColor = [UIColor clearColor];
+    //label.backgroundColor = [UIColor clearColor];
     [label sizeToFit];
     [view addSubview:label];
     
@@ -120,7 +125,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     if (indexPath.section == 0 && indexPath.row == 0) {
 
@@ -129,8 +134,9 @@
         UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:loginController];
         
         [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
+        
     } else if (indexPath.section == 0 && indexPath.row == 1){
-        CSListViewController* listController = [[CSListViewController alloc]init];
+        CSTweetViewController* listController = [[CSTweetViewController alloc]init];
         UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:listController];
         [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
     }else if (indexPath.section == 0 && indexPath.row == 2){
@@ -159,7 +165,7 @@
 #pragma mark - UITableView Datasource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return 62;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -174,21 +180,28 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"Cell";
+    static NSString* cellIdentifier = @"menuCategoryCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    MenuCategoryCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[MenuCategoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    
+
     if (indexPath.section == 0) {
         NSArray *titles = @[@"主页", @"评论", @"版块"];
-        cell.textLabel.text = titles[indexPath.row];
+        cell.categoryName.text = titles[indexPath.row];
     } else {
         NSArray *titles = @[@"设置", @"搜索", @"活动"];
-        cell.textLabel.text = titles[indexPath.row];
+        cell.categoryName.text = titles[indexPath.row];
     }
+    cell.categoryThumb.image = [UIImage imageNamed:@"icon_menu_home"];
+    
+//    if ([cell.categoryName.text isEqualToString:@"主页"])
+//    {
+//        //设置默认选中
+//        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+//    }
     
     return cell;
 }

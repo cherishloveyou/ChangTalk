@@ -11,5 +11,5 @@
 @interface HtmlString : NSString
 
 + (NSString *)transformString:(NSString *)originalStr;
-
++ (NSString *)parseToHtmlString:(NSString*)text;
 @end

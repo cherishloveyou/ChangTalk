@@ -62,7 +62,7 @@ static NSMutableDictionary *imgSizeDict = NULL;
 @synthesize position = _position;
 @synthesize componentIndex = _componentIndex;
 @synthesize isClosure = _isClosure;
-@synthesize img = img_;
+@synthesize img = _img;
 
 - (id)initWithString:(NSString*)aText tag:(NSString*)aTagLabel attributes:(NSMutableDictionary*)theAttributes;
 {
@@ -98,8 +98,6 @@ static NSMutableDictionary *imgSizeDict = NULL;
     return [[[self alloc] initWithTag:aTagLabel position:aPosition attributes:theAttributes] autorelease];
 }
 
-
-
 - (NSString*)description
 {
 	NSMutableString *desc = [NSMutableString string];
@@ -121,10 +119,10 @@ static NSMutableDictionary *imgSizeDict = NULL;
 @end
 
 @implementation RCLabelComponentsStructure
-@synthesize components = components_;
-@synthesize plainTextData = plainTextData_;
-@synthesize linkComponents = linkComponents_;
-@synthesize imgComponents = imgComponents_;
+@synthesize components = _components;
+@synthesize plainTextData = _plainTextData;
+@synthesize linkComponents = _linkComponents;
+@synthesize imgComponents = _imgComponents;
 
 - (void)dealloc {
     self.plainTextData = nil;
@@ -216,7 +214,7 @@ static NSInteger totalCount = 0;
         self.textColor = _originalColor;
         self.currentLinkComponent = nil;
         self.currentImgComponent = nil;
-        _lineSpacing = 3;
+        _lineSpacing = 2;
         _textAlignment = RTTextAlignmentLeft;
         _lineBreakMode = RTTextLineBreakModeWordWrapping;
         _attrString = NULL;
@@ -315,22 +313,22 @@ static NSInteger totalCount = 0;
 }
 
 - (void)setComponentsAndPlainText:(RCLabelComponentsStructure*)componnetsDS {
-    if (componentsAndPlainText_) {
-        if (componentsAndPlainText_ != componnetsDS) {
-            [componentsAndPlainText_ release];
-            componentsAndPlainText_ = nil;
+    if (_componentsAndPlainText) {
+        if (_componentsAndPlainText != componnetsDS) {
+            [_componentsAndPlainText release];
+            _componentsAndPlainText = nil;
         }
         else {
             return;
         }
     }
-    componentsAndPlainText_ = [componnetsDS retain];
+    _componentsAndPlainText = [componnetsDS retain];
     [self genAttributedString];
     [self setNeedsDisplay];
 }
 
 - (RCLabelComponentsStructure*)componentsAndPlainText {
-    return componentsAndPlainText_;
+    return _componentsAndPlainText;
 }
 
 CGSize MyGetSize(void* refCon) {
@@ -370,8 +368,8 @@ CGSize MyGetSize(void* refCon) {
 //            if (size.width < 1.0) {
 //                size.width = 1.0;
 //            }
-            size.height=18;
-            size.width=18;
+            size.height = 20;
+            size.width = 20;
             nsv = [NSValue valueWithBytes:&size objCType:@encode(CGSize)];
             [imgSizeDict setObject:nsv forKey:src];
             return size;

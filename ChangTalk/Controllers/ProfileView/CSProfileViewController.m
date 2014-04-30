@@ -10,12 +10,15 @@
 #import "CSHeadCoverView.h"
 #import "AFNetworking.h"
 #import "CSNewsDetailViewController.h"
+#import "TweetTableViewCell.h"
+#import "TweetItem.h"
 
 #define kAPI_GetUserMsgList(uid) [NSString stringWithFormat:@"http://mtalksvc.tc108.org:831/API/ATalk/GetInfoList?userID=%d&forumsCode=&keyword=&siteID=0&removeForwardingInfo=0&isContainUserName=0&orderBy=0&pageIndex=1&pageSize=1",uid]
 
 
 @interface CSProfileViewController ()
 @property (nonatomic, strong) CSHeadCoverView *coverView;
+@property (nonatomic, strong) NSMutableArray *tweetData;
 @end
 
 @implementation CSProfileViewController
@@ -37,15 +40,42 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    _coverView = [[CSHeadCoverView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 180)];
+    _tweetData = [NSMutableArray arrayWithCapacity:15];
+    
+    _coverView = [[CSHeadCoverView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 160)];
     [_coverView setBackgroundImage:[UIImage imageNamed:@"profile.jpg"]];
 
     self.tableView.tableHeaderView = self.coverView;
     
     //
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:kAPI_GetUserMsgList(16243) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        debugLog(@"JSON: %@", responseObject);
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json",nil];
+
+    [manager POST:kAPI_GetUserProfile(self.userName) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        debugLog(@"profile Json: %@", responseObject);
+        if ([responseObject objectForKey:@"UserID"]>0) {
+            //
+            int uid = [[responseObject objectForKey:@"UserID"]intValue];
+            [manager GET:kAPI_GetUserMessage(uid,1,40) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                debugLog(@"ProfileJSON: %@", responseObject);
+                //如果是刷新数据，那么久清空数据集
+  
+                NSArray *array = [responseObject objectForKey:@"InfoList"];
+                if (array) {
+                    for (id dicItem in array) {
+                        TweetItem *item = [[TweetItem alloc] initWithDictionary:dicItem];
+                        [_tweetData addObject:item];
+                    }
+                }
+                [self.tableView reloadData];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@", error);
+                //alert network error
+
+            }];
+        }else{
+            //
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         debugLog(@"Error: %@", error);
     }];
@@ -86,19 +116,35 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 10;
+    return [self.tweetData count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TweetItem *weibo = [_tweetData objectAtIndex:indexPath.row];
+    float height = [TweetView getTweetViewHeight:weibo isRepost:NO];
+    
+    height += 58;
+    
+    return height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"UserMessageCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString* cellIdentifier = @"profileCellIdentifier";
     
+    TweetTableViewCell *cell = (TweetTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[TweetTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    cell.textLabel.text = @"User message list";
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if ([_tweetData count]>0) {
+        TweetItem *weibo = [_tweetData objectAtIndex:indexPath.row];
+        cell.tweetItem = weibo;
+    }
+    
     return cell;
 }
 
@@ -108,45 +154,5 @@
     detailController.newsid = 100;
     [self.navigationController pushViewController:detailController animated:YES];
 }
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
