@@ -15,9 +15,8 @@
 
 @interface CSHomeViewController : UIViewController<CSSlideSwitchViewDelegate>
 
-@property (nonatomic, strong) CSSlideSwitchView* slideView;
-@property (nonatomic, strong) CSNewsViewController* vc1;
-//@property (nonatomic, strong) CSListViewController* vc2;
-@property (nonatomic, strong) CSTweetViewController* vc2;
+@property (nonatomic, strong) CSSlideSwitchView *slideView;
+@property (nonatomic, strong) CSNewsViewController *newsVC;
+@property (nonatomic, strong) CSTweetViewController *tweetVC;
 
 @end

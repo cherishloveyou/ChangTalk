@@ -81,35 +81,35 @@
     //
     debugLog(@"full imageview!");
     
-    if (self.viewController) {
-        if ([self.viewController isKindOfClass:[CSTweetViewController class]]) {
-            UITableView* tableView = ((CSTweetViewController*)self.viewController).tableViewList;
-            UIWindow* window = [UIApplication sharedApplication].keyWindow;
-            
-            // convert rect to self(cell)
-            CGRect rectInCell = [self convertRect:_tweetThumb.frame toView:self];
-            
-            // convert rect to tableview
-            CGRect rectInTableView = [self convertRect:rectInCell toView:tableView];//self.superview
-            
-            // convert rect to window
-            CGRect rectInWindow = [tableView convertRect:rectInTableView toView:window];
-            
-            // show photo full screen
-            UIImage* image = _tweetThumb.image;
-            
-            if (image) {
-                rectInWindow = CGRectMake(rectInWindow.origin.x + (rectInWindow.size.width - image.size.width) / 2.f,
-                                          rectInWindow.origin.y + (rectInWindow.size.height - image.size.height) / 2.f,
-                                          image.size.width, image.size.height);
-            }
-            PhotoBrowseView* browseView =
-            [[PhotoBrowseView alloc] initWithUrlPath:self.tweetItem.tweetImage
-                                                       thumbnail:_tweetThumb.image
-                                                        fromRect:rectInWindow];
-            [window addSubview:browseView];
-        }
-    }
+//    if (self.viewController) {
+//        if ([self.viewController isKindOfClass:[CSTweetViewController class]]) {
+//            UITableView* tableView = ((CSTweetViewController*)self.viewController).tableViewList;
+//            UIWindow* window = [UIApplication sharedApplication].keyWindow;
+//            
+//            // convert rect to self(cell)
+//            CGRect rectInCell = [self convertRect:_tweetThumb.frame toView:self];
+//            
+//            // convert rect to tableview
+//            CGRect rectInTableView = [self convertRect:rectInCell toView:tableView];//self.superview
+//            
+//            // convert rect to window
+//            CGRect rectInWindow = [tableView convertRect:rectInTableView toView:window];
+//            
+//            // show photo full screen
+//            UIImage* image = _tweetThumb.image;
+//            
+//            if (image) {
+//                rectInWindow = CGRectMake(rectInWindow.origin.x + (rectInWindow.size.width - image.size.width) / 2.f,
+//                                          rectInWindow.origin.y + (rectInWindow.size.height - image.size.height) / 2.f,
+//                                          image.size.width, image.size.height);
+//            }
+//            PhotoBrowseView* browseView =
+//            [[PhotoBrowseView alloc] initWithUrlPath:self.tweetItem.tweetImage
+//                                                       thumbnail:_tweetThumb.image
+//                                                        fromRect:rectInWindow];
+//            [window addSubview:browseView];
+//        }
+//    }
     
 }
 

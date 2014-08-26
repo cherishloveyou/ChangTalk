@@ -105,9 +105,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     //判断是否是第一次使用
-    NSString* key = (NSString *)kCFBundleVersionKey;
-    NSString* lastVersion = [[NSUserDefaults standardUserDefaults] stringForKey:key];
-    NSString* currentVersion= [NSBundle mainBundle].infoDictionary[key];
+    NSString *key = (NSString *)kCFBundleVersionKey;
+    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] stringForKey:key];
+    NSString *currentVersion= [NSBundle mainBundle].infoDictionary[key];
     
     if ([lastVersion isEqualToString:currentVersion]) {
         

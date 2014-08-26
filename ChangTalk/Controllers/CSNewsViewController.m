@@ -18,6 +18,7 @@
 #import "MMDrawerController.h"
 #import "NewsItem.h"
 
+
 @interface CSNewsViewController ()
 {
     EGORefreshTableHeaderView* _refreshHeaderView;
@@ -85,7 +86,7 @@
         NSMutableArray *viewsArray = [@[] mutableCopy];
         for (int i = 0; i < [_bannerData count]; ++i) {
             UIImageView* tempView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 144)];
-            [tempView setImageWithURL:[NSURL URLWithString:[_bannerData[i] objectForKey:@"ImgUrl"]] placeholderImage:[UIImage imageNamed:@"placeholderImage.png"]];
+            [tempView sd_setImageWithURL:[NSURL URLWithString:[_bannerData[i] objectForKey:@"ImgUrl"]] placeholderImage:[UIImage imageNamed:@"placeholderImage.png"]];
             
             UILabel* tempLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(tempView.frame)-20, 320, 20)];
             tempLabel.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8];
@@ -102,7 +103,7 @@
             return [viewsArray count];
         };
         _bannerView.TapActionBlock = ^(NSInteger curIndex){
-            debugLog(@"点击了第%d个",curIndex);
+            debugLog(@"点击了第%ld个",curIndex);
         };
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -149,6 +150,7 @@
     else {
     }
 }
+
 - (void)reLoadNewsData:(BOOL)noRefresh
 {
     //如果有网络连接,刷新数据
@@ -370,16 +372,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CSContentViewController *detailController = [[CSContentViewController alloc] init];
-    NewsItem* item = [_newsData objectAtIndex:indexPath.row];
-    detailController.articleID = item.newsID;
+    NewsItem *item = [_newsData objectAtIndex:indexPath.row];
+    [_delegate slidePushDetailViewController:item.newsID];
     
-    MMDrawerController *parentController = (MMDrawerController *)self.view.window.rootViewController;
-    CSNavigationController *nav = (CSNavigationController*)parentController.centerViewController;
-    
-    [nav pushViewController:detailController animated:YES];
-    
-    //[parentController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+//    CSContentViewController *detailController = [[CSContentViewController alloc] init];
+//    detailController.articleID = item.newsID;
+//    
+//    MMDrawerController *parentController = (MMDrawerController *)self.view.window.rootViewController;
+//    CSNavigationController *nav = (CSNavigationController*)parentController.centerViewController;
+//    
+//    [nav pushViewController:detailController animated:YES];
+
 }
 
 @end

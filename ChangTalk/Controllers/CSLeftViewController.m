@@ -140,7 +140,7 @@
         UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:listController];
         [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
     }else if (indexPath.section == 0 && indexPath.row == 2){
-        CSNewsViewController* listController = [[CSNewsViewController alloc]init];
+        CSNewsViewController *listController = [[CSNewsViewController alloc]init];
         UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:listController];
         [self.mm_drawerController setCenterViewController:navigationController withCloseAnimation:YES completion:nil];
     }else if (indexPath.section == 1 && indexPath.row == 0){

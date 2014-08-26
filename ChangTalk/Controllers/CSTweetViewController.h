@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "EGORefreshTableHeaderView.h"
 #import "EGORefreshTableFooterView.h"
+#import "SidePushViewControllerDelegate.h"
 
 @interface CSTweetViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,EGORefreshTableDelegate>
 
-@property (nonatomic, strong) UITableView *tableViewList;
+@property (nonatomic, weak)id delegate;
 
 @end

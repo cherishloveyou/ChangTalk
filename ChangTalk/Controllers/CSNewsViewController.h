@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "EGORefreshTableHeaderView.h"
 #import "EGORefreshTableFooterView.h"
+#import "SidePushViewControllerDelegate.h"
 
 @interface CSNewsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,EGORefreshTableDelegate>
 
 @property (nonatomic, strong) UITableView *tableViewList;
+
+@property (nonatomic, weak) id delegate;
 
 @end

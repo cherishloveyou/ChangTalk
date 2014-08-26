@@ -9,8 +9,9 @@
 #import "CSHomeViewController.h"
 #import "MMDrawerBarButtonItem.h"
 #import "CSPublishViewController.h"
+#import "CSContentViewController.h"
 
-@interface CSHomeViewController ()
+@interface CSHomeViewController ()<SidePushViewControllerDelegate>
 
 @end
 
@@ -64,8 +65,11 @@
     self.slideView.shadowImage = [[UIImage imageNamed:@"tab_line_shadow.png"]
                                         stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f];
     
-    self.vc1 = [[CSNewsViewController alloc]init];
-    self.vc2 = [[CSTweetViewController alloc]init];
+    _newsVC = [[CSNewsViewController alloc]init];
+    _newsVC.delegate = self;
+    
+    _tweetVC = [[CSTweetViewController alloc]init];
+    _tweetVC.delegate = self;
     
     [self.view addSubview:self.slideView];
     
@@ -93,6 +97,15 @@
 //    }];
 }
 
+#pragma -mark TopTenTopicsDelegate
+- (void)slidePushDetailViewController:(NSInteger)articleID
+{
+    CSContentViewController *contentVC = [[CSContentViewController alloc]init];
+    contentVC.articleID = articleID;
+    [self.navigationController pushViewController:contentVC animated:YES];
+    contentVC = nil;
+}
+
 #pragma mark - 滑动tab视图代理方法
 - (NSUInteger)numberOfTab:(CSSlideSwitchView *)view
 {
@@ -102,9 +115,9 @@
 - (UIViewController *)slideSwitchView:(CSSlideSwitchView *)view viewOfTab:(NSUInteger)number
 {
     if (number == 0) {
-        return self.vc1;
+        return self.newsVC;
     } else if (number == 1) {
-        return self.vc2;
+        return self.tweetVC;
     }else{
         return nil;
     }

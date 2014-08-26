@@ -22,6 +22,7 @@
     NSInteger pageIndex;
 }
 
+@property (nonatomic, strong) UITableView *tableViewList;
 @property (nonatomic, strong)NSMutableArray *msgData;
 
 @end
@@ -317,14 +318,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TweetItem *weibo = [self.msgData objectAtIndex:indexPath.row];
+    [_delegate slidePushDetailViewController:weibo.tweetID];
     
-    CSContentViewController *detailController = [[CSContentViewController alloc] init];
-    detailController.articleID = weibo.tweetID;
-    
-    MMDrawerController *parentController = (MMDrawerController *)self.view.window.rootViewController;
-    CSNavigationController *nav = (CSNavigationController*)parentController.centerViewController;
-    
-    [nav pushViewController:detailController animated:YES];
+//    CSContentViewController *detailController = [[CSContentViewController alloc] init];
+//    detailController.articleID = weibo.tweetID;
+//    
+//    MMDrawerController *parentController = (MMDrawerController *)self.view.window.rootViewController;
+//    CSNavigationController *nav = (CSNavigationController*)parentController.centerViewController;
+//    
+//    [nav pushViewController:detailController animated:YES];
 }
 
 
